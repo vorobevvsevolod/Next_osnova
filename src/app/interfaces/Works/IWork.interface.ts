@@ -12,8 +12,9 @@ export interface IWork {
     slogan: string,
     price: string,
     priceDescription: string,
-    categoryId: string,
+    categoryId: number,
     priceFactor: IPriceFactor,
     need: INeed,
     images: IImages[],
+    url:string;
 }

@@ -1,0 +1,114 @@
+.categoryPages{
+  &_title{
+    margin: 50px 0 20px 0;
+    font-size: 30px;
+    color: #313131;
+    position: relative;
+    font-weight: 800;
+
+    span{
+      font-weight: 500;
+      color: #484343;
+
+    }
+
+    &:after {
+      width: 100px;
+      height: 2px;
+      background-color: #14a414;
+      margin: 15px 0 0 0;
+      display: block;
+      content: "";
+    }
+  }
+
+  &_litleTitle{
+    font-size: 28px;
+    font-weight: 700;
+    margin: 25px 0;
+    color: #3f3f3f;
+    letter-spacing: 1px;
+  }
+
+  &_subTitle{
+    font-size: 16px;
+    font-weight: 400;
+    color: #3b3b3b;
+    line-height: 22px;
+    text-align: justify;
+
+  }
+
+  &_text{
+    font-size: 16px;
+    font-weight: 400;
+    color: #3b3b3b;
+    line-height: 22px;
+    text-align: justify;
+
+
+    text-indent: 20px;
+  }
+
+  &_titleCenter{
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin: 50px 0 30px 0;
+    color: #252525;
+    text-align: center;
+  }
+
+  &_description{
+    border: 1px solid rgba(20, 164, 20, 0.2);
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 0px 8px 2px rgba(34, 60, 80, 0.1) inset;
+    -moz-box-shadow: 0px 0px 8px 2px rgba(34, 60, 80, 0.1) inset;
+    box-shadow: 0px 0px 8px 2px rgba(34, 60, 80, 0.1) inset;
+    padding: 15px;
+    color: #7c7c7c;
+    margin-top: 15px;
+    line-height: 21px;
+    text-align: justify;
+    text-indent: 20px;
+
+    &:first-letter{
+      font-weight: 900;
+      font-size: 18px;
+      color: rgba(20, 164, 20, 1);
+    }
+  }
+
+
+  &_descriptionMin{
+    border: 1px solid rgba(20, 164, 20, 0.2);
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 0px 8px 2px rgba(80, 34, 38, 0.1) inset;
+    -moz-box-shadow: 0px 0px 8px 2px rgba(34, 60, 80, 0.1) inset;
+    box-shadow: 0px 0px 8px 2px rgba(34, 60, 80, 0.1) inset;
+    padding: 15px;
+    color: #393939;
+    margin-top: 15px;
+    line-height: 21px;
+    text-align: justify;
+    text-indent: 20px;
+
+  }
+
+  &_bread{
+    margin: 15px 0;
+    &_link{
+      margin: 0px 10px 0px 10px;
+      font-weight: 600;
+      color: #777777;
+
+      &:first-child{
+        margin-left: 0;
+      }
+
+      &_last{
+        color: #339933;
+      }
+    }
+  }
+}

@@ -14,10 +14,11 @@ export interface IMaterial {
     Price_Up_To_300: number,
     Price_Up_To_100: number,
     priceDescription: string,
-    categoryId: string,
+    categoryId: number,
     priceFactor: IPriceFactor,
     need: INeed,
     images: IImages[],
     parentMaterialId: number | null,
-    sub: IMaterial[]
+    sub: IMaterial[],
+    url:string;
 }

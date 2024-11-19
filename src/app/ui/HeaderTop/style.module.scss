@@ -1,0 +1,128 @@
+.hesderSub{
+  width: auto;
+
+  height: 140px;
+  box-shadow: 0 2px 5px 0 rgba(32,32,32,.08);
+  z-index: 1000;
+
+  &_top{
+    position: relative;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px 10px 20px;
+    height: 60%;
+    border-bottom: 1px solid #afafaf;
+
+    &_left{
+
+      width: 25%;
+
+      &_title{
+        color: #383838;
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-size: 13px;
+      }
+      &_subtitle{
+        font-weight: bold;
+        color: #339933;
+        font-size: 16px;
+        font-style: italic;
+        span{
+          color: #7c7c7c;
+          margin-right: 10px;
+          font-style: normal;
+        }
+      }
+    }
+
+    &_center{
+      width: auto;
+      display: flex;
+      align-items: center;
+      text-align: center;
+
+      &_item{
+        margin-left: 30px;
+        width: auto;
+        &_call{
+          display: flex;
+          span{
+            color: #000000;
+            margin-left: 7px;
+            font-style: italic;
+            margin-bottom: 7px;
+          }
+
+          &_number{
+            margin-left: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            transition: all 0.2s ease-in;
+            padding: 0px 2px 2px 2px;
+
+            &:hover{
+              border-bottom: 2px solid #339933;
+              border-radius: 5px;
+            }
+          }
+        }
+
+        &:first-child{
+          margin-left: 0;
+        }
+      }
+    }
+
+    &_right{
+      width: 25%;
+      text-align: center;
+      &_title{
+        color: #000000;
+        font-style: italic;
+        margin-bottom: 7px;
+      }
+      &_email{
+        font-size: 20px;
+        font-weight: bold;
+        transition: all 0.2s ease-in;
+        padding: 0px 2px 2px 2px;
+
+        &:hover{
+          border-bottom: 2px solid #339933;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+
+  &_bottom{
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    height: 40%;
+    &_nav{
+      display: flex;
+      margin: 0 auto;
+      &_link{
+        margin-left: 30px;
+        font-weight: bold;
+        color: #181818;
+        border-bottom: 2px solid transparent;
+        transition: all 0.2s ease-in;
+
+        &:hover{
+          border-bottom: 2px solid #339933;
+        }
+        &:first-child{
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+
+
+}

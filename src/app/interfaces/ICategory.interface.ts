@@ -1,10 +1,11 @@
 import {ISubcategory} from "./ISubcategory.interface";
 
 export interface ICategory {
-    id: string;
+    id: number;
     name: string;
-    img: string,
-    typeOfServiceId: number,
+    img: string;
+    url:string;
+    typeOfServiceId: number;
     sub: ISubcategory[];
 }
 

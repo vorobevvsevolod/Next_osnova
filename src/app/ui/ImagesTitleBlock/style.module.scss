@@ -1,0 +1,173 @@
+.images {
+  &_container {
+    position: relative;
+    height: 540px;
+    display: flex;
+    margin-bottom: 50px;
+  }
+
+  &_containerSlider{
+    width: 600px;
+    height: 450px;
+
+    &_number{
+      position: absolute;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      left: 20px;
+
+      &_containerTitle{
+        display: block;
+        margin-left: 10px;
+        &_title{
+          color: #14a414;
+          font-size: 16px;
+        }
+        span{
+          font-weight: 700;
+          font-size: 20px;
+          color: black;
+        }
+      }
+    }
+  }
+
+  &_TitleDesc {
+    position: relative;
+    width: 118%;
+    height: 440px;
+    background-color: #3b3b3b;
+    z-index: 0;
+    right: 10%;
+
+    border-radius: 4px;
+    &_container{
+    }
+
+    &_title{
+      position: relative;
+      margin: 20px 0 20px 50px;
+      font-size: 30px;
+      color: #313131;
+
+      font-weight: 800;
+
+      &:after {
+        width: 100px;
+        height: 2px;
+        background-color: #339933;
+        margin: 15px 0 0 0;
+        display: block;
+        content: "";
+      }
+    }
+
+    &_container{
+      margin-left: 0px;
+      padding-right: 40px;
+    }
+
+    &_desc {
+
+
+
+      &_containerDesc{
+        position: relative;
+        top: 60%;
+        transform: translateY(50%);
+        margin-left: 100px;
+        margin-top: 20px;
+      }
+
+      &_containerDescPrice{
+        position: relative;
+        transform: translateY(30%);
+        margin-left: 100px;
+      }
+
+      &_text{
+        color: white;
+        font-size: 17px;
+        font-weight: 500;
+        text-align: justify;
+
+      }
+
+      &_title{
+        color: #14a414;
+        margin: 40px 0 10px 0;
+        font-weight: 800;
+        font-size: 20px;
+
+
+        &_list{
+          color: white;
+          margin-left: 20px;
+          margin-bottom: 10px;
+          font-size: 18px;
+          font-style: italic;
+        }
+      }
+
+
+      &_price{
+        font-size: 28px;
+        color: #fff;
+        font-weight: 800;
+        span{
+
+          color: #14a414;
+
+          margin-bottom: 15px;
+        }
+      }
+    }
+
+    &_YearContainer {
+      position: absolute;
+      background-color: #339933;
+      font-weight: 700;
+      font-size: 18px;
+      bottom: 7%;
+      right: -10px;
+      z-index: 1;
+      width: 85%;
+      height: 55px;
+      border-radius: 50px 0px 0px 50px;
+      text-align: justify;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+
+      &_text {
+        color: white;
+        margin-left: 15px;
+      }
+
+
+    }
+  }
+
+  &_img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    &_back {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 600px;
+      height: 450px;
+      background-color: #339933;
+      z-index: 1;
+      border-radius: 0px 0px 6px 0px;
+
+    }
+  }
+}
+
+

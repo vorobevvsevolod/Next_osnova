@@ -1,0 +1,105 @@
+
+.stagesWork{
+
+
+  &_item{
+    margin: 30px 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 200px;
+
+    &_shadowRight{
+      -webkit-box-shadow: 13px 13px 10px -13px rgba(34, 60, 80, 0.2);
+      -moz-box-shadow: 13px 13px 10px -13px rgba(34, 60, 80, 0.2);
+      box-shadow: 13px 13px 10px -13px rgba(34, 60, 80, 0.2);
+    }
+
+    &_shadowLeft{
+      -webkit-box-shadow: -13px 13px 10px -13px rgba(34, 60, 80, 0.2);
+      -moz-box-shadow: -13px 13px 10px -13px rgba(34, 60, 80, 0.2);
+      box-shadow: -13px 13px 10px -13px rgba(34, 60, 80, 0.2);
+    }
+
+
+
+
+    &_TitleText{
+      width: 73%;
+      &_title{
+        position: relative;
+        width: 70px;
+        height: 70px;
+        font-family: fg-ex,sans-serif;
+        text-align: center;
+        background-color: #fff;
+        -webkit-box-shadow: 2px 2px 4px 0 rgba(0,0,0,.2);
+        box-shadow: 2px 2px 4px 0 rgba(0,0,0,.2);
+        z-index: 2;
+        border-radius: 0px 0px 3px 0px;
+        margin: 10px 0px 0px 10px;
+
+
+        span{
+          display: block;
+          text-align: center;
+          transform: translateY(11px);
+          font-size: 36px;
+          font-weight: 900;
+          color: #585d5d;
+        }
+
+
+        &_back{
+          content: "";
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width: 70px;
+          height: 70px;
+          background-color: #14a414;
+          z-index: 1;
+          border-radius: 3px 0px 0px 0px;
+        }
+
+        &_container{
+          display: flex;
+          position: relative;
+          align-items: center;
+
+        }
+
+
+        &_subtitle{
+          padding: 0 0 0 20px;
+          color: #757979;
+          font-size: 19px;
+          font-weight: 700;
+
+        }
+
+      }
+
+      &_text{
+        font-size: 14px;
+        margin: 25px 0 25px 10px;
+        text-align: justify;
+        text-indent: 20px;
+
+
+      }
+
+    }
+
+    &_img{
+      height: 100%;
+      width: 25%;
+      &_radiusLeft{
+        border-radius: 6px 0px 0px 6px;
+      }
+      &_radiusRight{
+        border-radius: 0px 6px 6px 0px;
+      }
+    }
+  }
+}

@@ -1,0 +1,277 @@
+.yandexMap {
+
+  border-radius: 8px;
+  overflow: hidden;
+  display: block;
+  background-color: #3b3b3b;
+
+  -webkit-box-shadow: 0px 0px 10px -1px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 0px 10px -1px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 0px 10px -1px rgba(34, 60, 80, 0.2);
+  margin-bottom: 10px;
+
+  &_btnReset{
+    position: absolute;
+    background-color: #fff;
+    border-color: transparent;
+    box-shadow: 0 1px 2px 1px rgba(0,0,0,.15), 0 2px 5px -3px rgba(0,0,0,.15);
+    width: 140px;
+    height: 28px;
+    vertical-align: middle;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.15s ease-in;
+    top: 10px;
+    right: 39%;
+
+    &:hover{
+      background-color: #3b3b3b;
+      color: white;
+    }
+
+  }
+
+  &_container {
+    display: flex;
+    width: 100%;
+    height: 600px;
+    position: relative;
+    border-radius: 6px 6px 6px 6px;
+
+  }
+
+  &_title{
+    position: relative;
+    text-align: center;
+
+    font-weight: 800;
+    font-size: 30px;
+    border: 1px solid white;
+    border-radius: 5px 5px 0px 0px;
+    line-height: 45px;
+    span{
+      top: -3px;
+      position: relative;
+      color: white;
+    }
+  }
+
+  &_calculation{
+    position: relative;
+    height: 100%;
+    background-color: #3b3b3b;
+    width: 30%;
+    opacity: 1;
+    z-index: 1000;
+    padding: 0px 10px 10px 10px;
+    overflow: auto;
+    margin-top: 6px;
+
+    &_container{
+      background-color: white;
+      padding: 10px;
+      height: 76%;
+    }
+  }
+
+  &_tabsCategories{
+    position: relative;
+    height: 40px;
+    width: 70%;
+    border-radius: 5px 0px 0px 0px;
+    display: flex;
+    overflow: hidden;
+
+
+
+    &_item{
+      display: flex;
+      width: 33.4%;
+      padding: 5px 5px 5px 15px;
+      cursor: pointer;
+      font-size: 13px;
+      align-items: center;
+      background-color: #e5e5e5;
+      font-weight: 500;
+      border-right: 1px solid #d7d7d7;
+      transition: all 0.2s ease-in-out;
+      color: #707070;
+      border-top: 2px solid transparent;
+
+      &:last-child{
+      }
+
+      &:hover{
+        border-top: 2px solid #14a414;
+        color: #14a414;
+        font-weight: 700;
+        background-color: white;
+      }
+
+
+      &_active{
+        background-color: white;
+        font-weight: 700;
+        color: #14a414;
+
+        &:hover{
+          border-top: 2px solid #14a414;
+          color: #14a414;
+          font-weight: 700;
+        }
+      }
+
+      &_firstActive{
+        background-color: white;
+        overflow: hidden;
+        font-weight: 700;
+        color: #14a414;
+      }
+
+      &_last{
+      }
+    }
+  }
+
+  &_selectMaterial{
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: none;
+    background-color: #3b3b3b;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 15px;
+    height: 40px;
+    text-align: center;
+    color: white;
+
+    option {
+      font-weight: 500;
+      padding: 5px 0;
+    }
+
+    option:hover {
+      background-color: white;
+    }
+
+    &_title{
+      color: #838383;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+  }
+
+  &_buttonCalculation{
+    position: relative;
+    width: 100%;
+    border: none;
+    border-radius: 0px 0px 5px 5px;
+    height: 47px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+
+    &_active{
+      background-color: #14a414;
+      color: white;
+    }
+
+    &_def{
+      background-color: #ef2323;
+      border-top: 1px solid #ef2323;
+      color: white;
+    }
+  }
+
+  &_data{
+    font-size: 20px;
+    color: #a8a8a8;
+    font-weight: 600;
+    background-color: #3b3b3b;
+    border-radius: 20px;
+    padding: 5px 5px;
+    text-align: center;
+    //box-shadow: 0px 0px 8px 2px rgba(34, 60, 80, 0.2) inset;
+    margin-bottom: 15px;
+    height: 40px;
+    span{
+      color: white;
+      font-weight: 700;
+      font-size: 20px;
+
+    }
+  }
+
+  &_price{
+    font-size: 24px;
+    color: #8c8c8c;
+    font-weight: 700;
+    border-top: 1px solid #14a414;
+    background-color: white;
+    padding: 5px 5px;
+    text-align: center;
+
+    height: 45px;
+    span{
+      color: black;
+      font-weight: 700;
+      font-size: 24px;
+
+    }
+  }
+
+  &_kybSelect{
+    display: flex;
+
+    border-radius: 21px;
+    justify-content: space-between;
+    background-color: #3b3b3b;
+    padding: 1px 1px;
+    margin-bottom: 15px;
+    &_item{
+      border-radius: 50%;
+      position: relative;
+
+      width: 40px;
+      height: 40px;
+      z-index: 100;
+      cursor: pointer;
+      border: 2px solid transparent;
+
+      transition: all 0.15s ease-in;
+       span{
+         position: absolute;
+         top: 50%;
+         left: 52%;
+         transform: translate(-50%, -50%);
+         font-size: 18px;
+
+         font-weight: 600;
+         letter-spacing: 1px;
+         z-index: 1000;
+       }
+
+      &_active{
+        background-color: rgb(20, 164, 20);
+        color: white;
+        span{
+          color: white;
+        }
+      }
+
+      &_def{
+        box-shadow: 0px 0px 2px 2px rgba(34, 60, 80, 0.1) inset;
+
+        &:hover {
+         border: 2px solid rgb(20, 164, 20);
+        }
+        span{
+          color: white;
+        }
+      }
+    }
+  }
+}

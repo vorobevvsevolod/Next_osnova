@@ -1,0 +1,45 @@
+.fertileLand{
+  &_priceTable{
+    width: 100%;
+    -webkit-box-shadow: 0 0 6px 0 rgba(34,31,31,.15);
+    box-shadow: 0 0 6px 0 rgba(34,31,31,.15);
+    border-radius: 3px;
+    margin: 25px 0;
+    &_head{
+      background-color: #14a414;
+      text-transform: uppercase;
+      font-weight: 800;
+      padding: 20px;
+      color: white;
+    }
+
+    &_body{
+
+      &_subtitle{
+        color: #6e6e6e;
+        font-weight: 600;
+        padding: 20px;
+      }
+
+      &_title{
+        color: black;
+        font-weight: 700;
+        padding: 20px;
+        text-align: center;
+      }
+    }
+
+    tr {
+      transition: box-shadow 0.3s ease;
+      &:hover {
+        box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.1) inset;
+        color: black;
+      }
+    }
+    &_price{
+      color: #14a414;
+      font-size: 18px;
+    }
+  }
+}
+
