@@ -60,31 +60,6 @@ export async function MaterialsGetAll(): Promise<IMaterial[]> {
     }
 }
 
-export async function MaterialsGetById(id:string): Promise<IMaterial> {
-    try {
-        const response = await fetch(`${process.env.API_URL}/api/materials/${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            next: {
-                revalidate: 100
-            }
-        });
-
-        if (!response.ok) {
-            console.log(`Error: ${response.status} ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        return data.message;
-
-    } catch (error) {
-        console.error("Error fetching materials: ", error);
-        throw error;
-    }
-}
-
 export async function DeliveryLocationGetAll(): Promise<DeliveryLocationResponse> {
     try {
         const response = await fetch(`${process.env.API_URL}/api/deliverylocation`, {

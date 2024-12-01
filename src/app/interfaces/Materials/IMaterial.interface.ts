@@ -1,6 +1,7 @@
 import {IPriceFactor} from "../IPriceFactor.interface";
 import {INeed} from "../INeed.interface";
 import {IImages} from "../IImages.interface";
+import {IMaterialProperties} from "@/app/interfaces/IMaterialProperties.interface";
 
 export interface IMaterial {
     id: number,
@@ -17,8 +18,11 @@ export interface IMaterial {
     categoryId: number,
     priceFactor: IPriceFactor,
     need: INeed,
+    materialProperties: IMaterialProperties,
     images: IImages[],
     parentMaterialId: number | null,
+    seoTitle: string,
+    seoDescription: string,
     sub: IMaterial[],
     url:string;
 }

@@ -7,4 +7,6 @@ export interface WorksCategoryInterface {
     descriptionTitle: string,
     descriptionText: string,
     titleCenter: string,
+    seoTitle: string,
+    seoDescription: string,
 }

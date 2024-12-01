@@ -9,4 +9,6 @@ export interface MaterialsCategoryInterface {
     subTitle: string;
     subTitleText: string;
     titleCenter: string;
+    seoTitle:string;
+    seoDescription: string;
 }

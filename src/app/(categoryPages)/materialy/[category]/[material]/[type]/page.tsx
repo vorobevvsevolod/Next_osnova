@@ -21,6 +21,8 @@ import {MaterialsCategory} from "@/app/(categoryPages)/MaterialsCategory";
 import Link from "next/link";
 import CarsPark from "@/app/ui/CategoryElemetns/CarsPark";
 import CarsParkSamosval from "@/app/ui/CategoryElemetns/CarsParkSamosval";
+import {BreadcrumbList, Product, WithContext} from "schema-dts";
+import {OrganizationSchema} from "@/services/OrganizationSchema";
 
 export async function generateStaticParams() {
     const materialList = await MaterialsGetAll();
@@ -49,8 +51,8 @@ export async function generateMetadata(
     const materialFind = materials.find(work => work.url === material)?.sub.find(mat => mat.url === type);
 
     return {
-        title: materialFind?.title ? materialFind.title + " от компании «СК Основа» с доставкой недорого в СПб и области - без посредников" : null,
-        description: `Купить ${materialFind?.title} с доставкой в Санкт-Петербурге и Ленинградской области. Оптовые цены. Напрямую без посредников. Звоните и заказывайте.`,
+        title: materialFind?.seoTitle,
+        description: materialFind?.seoDescription,
         openGraph: {
             images: [`${process.env.NEXT_PUBLIC_API_URL}/${materialFind?.images[0].url}`],
             locale: 'ru_RU'
@@ -70,10 +72,74 @@ export default async function MaterialPageServer(props: MaterialsPropsInterface)
         ]);
         const activeCategory = categories.find(cat => cat.url === params.category);
         const material = materials.find(work => work.url === params.material)?.sub.find(mat => mat.url === params.type);
+
+        const jsonLdBreadcrumbList: WithContext<BreadcrumbList> = {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Главная',
+                    item: process.env.DOMAIN,
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: activeCategory?.name || 'Категория',
+                    item: `${process.env.DOMAIN}/materialy/${params.category}`,
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 3,
+                    name: materials.find(work => work.url === params.material)?.title || 'Материал',
+                    item: `${process.env.DOMAIN}/materialy/${params.category}/${params.material}`,
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 3,
+                    name:material?.title  || 'Тип',
+                    item: `${process.env.DOMAIN}/materialy/${params.category}/${params.material}/${material?.url}`,
+                }
+            ],
+        };
+
+
+        const jsonLdServer: WithContext<Product> = {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": material?.title,
+            "description": material?.seoDescription,
+            "image": material?.images[0].url,
+            "brand": {
+                "@type": "Brand",
+                "name": "СК Основа"
+            },
+            "offers": {
+                "@type": "Offer",
+                "priceCurrency": "RUB", // Валюта
+                "price": material?.Price_Up_To_100,
+                "url": `${process.env.DOMAIN}/materialy/${activeCategory?.url}/${material?.url}`,
+                "availability": "https://schema.org/InStock"
+            }
+        }
+
         if(material?.id){
             return (
                 <div className={styles.workItem_container}>
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLdBreadcrumbList)}}
+                    />
 
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLdServer)}}
+                    />
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{__html: JSON.stringify(OrganizationSchema)}}
+                    />
                     <div className={categoryStyles.categoryPages_bread}>
                         <Link href="/" className={categoryStyles.categoryPages_bread_link}>Главная</Link>
                         <span>/</span>
@@ -92,10 +158,34 @@ export default async function MaterialPageServer(props: MaterialsPropsInterface)
 
                     {material && <ImagesTitleBlock images={material.images} title={material.title}
                                                    titleDesc={material.descriptionTitle} lastYear={material.lastYear}
-                                                   price={material.Price_Over_300 ? material.Price_Over_300 : material?.sub ? Math.min(...material.sub.map(sub => sub.Price_Up_To_100)) : material.Price_Up_To_100}/>}
+                                                   price={material.Price_Over_300 ? material.Price_Over_300 : material?.sub ? Math.min(...material.sub.map(sub => sub.Price_Up_To_100)) : material.Price_Up_To_100}
+                                                   category={'materialy'}/>}
                     <h2 className={categoryStyles.categoryPages_litleTitle}>Особенности материала</h2>
                     <div className={categoryStyles.categoryPages_text}>
                         {material.features}
+                    </div>
+                    <div className={styles.workItem_priceFactor}>
+                        {
+                            material.materialProperties.list.length ?
+                                <>
+                                    <h2 className={categoryStyles.categoryPages_title}> Свойства материала</h2>
+                                    {
+                                        material.materialProperties.list.map((list, index) => {
+                                            const text = list.name.split(':');
+                                            return (
+                                                <div className={styles.workItem_priceFactor_item} key={list.id}>
+                                                    <img width={30} height={30} src="/img/rostok.png" alt="rostok"/>
+                                                    <div className={styles.workItem_need_item_text}>
+                                                        <span>{text[0]}:</span>{text[1]}
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </>
+                                : <></>
+                        }
+
                     </div>
                     {
                         material.categoryId && material.sub && material.sub.length ? (

@@ -7,6 +7,7 @@ import {ICategory} from "@/app/interfaces/ICategory.interface";
 import {IGalleryWorks} from "@/app/interfaces/Works/IGalleryWorks.interface";
 import {ISubcategory} from "@/app/interfaces/ISubcategory.interface";
 import Slider from "@/app/ui/Slider";
+import Image from "next/image";
 
 interface Props {
     categories: ICategory[];
@@ -26,7 +27,7 @@ const YandexMap:React.FC<Props> = (props) => {
     const [zoomMapCof, setZoomMapCof] = React.useState<number>(1);
     const [zoomMap, setZoomMap] = React.useState<number>(9);
 
-    const [activeCategoryInner, setActiveCategoryInner] = React.useState<string | null>('2')
+    const [activeCategoryInner, setActiveCategoryInner] = React.useState<string | null>(null)
 
     const [activeSubCategory, setActiveSubCategory] = React.useState<number | null>(null)
     const [activeSubCategoryHover, setActiveSubCategoryHover] = React.useState<number | null>(null)
@@ -145,7 +146,7 @@ const YandexMap:React.FC<Props> = (props) => {
                     Все
                 </div>
                 {
-                    props.categories && activeCategoryInner && props.categories.map((category, index) => {
+                    props.categories && props.categories.map((category, index) => {
                         if(category.typeOfServiceId === 1)
                             return(
                                 <div className={`${styles.yandexMap_tabsCategories_item} ${category.id.toString() === activeCategoryInner ? styles.yandexMap_tabsCategories_item_active : ""}`}
@@ -248,13 +249,13 @@ const YandexMap:React.FC<Props> = (props) => {
 
                                         {
                                             activePoint && Subcategory.idSub === activeSubCategory
-                                                ? <img className={styles.yandexMap_list_item_open_ContainerTitle_img_back}
+                                                ? <Image width={35} height={35} className={styles.yandexMap_list_item_open_ContainerTitle_img_back}
                                                        src="/img/back.svg" alt="close"
                                                        onClick={() => {
                                                            setActivePoint(0)
                                                        }}/>
                                                 : activeSubCategory === Subcategory.idSub ?
-                                                    <img className={styles.yandexMap_list_item_open_ContainerTitle_img}
+                                                    <Image width={35} height={35} className={styles.yandexMap_list_item_open_ContainerTitle_img}
                                                          src="/img/close.svg" alt="close"
                                                          onClick={() => {
                                                              setShowArrayPoints(false)

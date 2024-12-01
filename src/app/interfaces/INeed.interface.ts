@@ -1,7 +1,8 @@
 export interface INeed {
     title: string,
     description: string,
-    workId: number,
+    workId?: number,
+    materialId?: number,
     list: [
         {
             id: string,

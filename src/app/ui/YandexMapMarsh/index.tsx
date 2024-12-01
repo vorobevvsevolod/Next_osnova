@@ -179,6 +179,7 @@ const YandexMapMarsh: React.FC<Props> = (props) => {
 
     React.useEffect(() =>{
         if (props.material?.id)setSelectedValue(props.material.id)
+        console.log(props.materials.filter(mat => mat.categoryId.toString() === '1'), props.materials);
     },[props.material])
 
 

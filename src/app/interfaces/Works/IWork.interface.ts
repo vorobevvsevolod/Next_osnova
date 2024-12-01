@@ -15,6 +15,8 @@ export interface IWork {
     categoryId: number,
     priceFactor: IPriceFactor,
     need: INeed,
+    seoTitle: string,
+    seoDescription: string,
     images: IImages[],
     url:string;
 }

@@ -154,24 +154,11 @@
   margin-bottom: 20px;
 
 
-  &::-webkit-scrollbar {
-    height: 6px !important;
-    background-color: #fff;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #3b3b3b;
-    border-radius: 8px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: #7e7e7e;
-  }
 
   &_item{
     flex: 0 0 auto; /* Задаем элементам фиксированную ширину */
     width: 32%; /* Измените на вашу нужную ширину */
-    height: 417px; /* Измените на вашу нужную высоту */
+    height: auto; /* Измените на вашу нужную высоту */
     margin-left: 10px;
     margin-top: 10px;
 

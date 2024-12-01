@@ -20,6 +20,8 @@ import {IMaterialFromLocation} from "@/app/interfaces/Materials/IMaterialFromLlo
 import {MaterialsPropsInterface} from "@/app/interfaces/Materials/MaterialsProps.interface";
 import Link from "next/link";
 import CarsParkSamosval from "@/app/ui/CategoryElemetns/CarsParkSamosval";
+import {BreadcrumbList, Product, Service, WithContext} from "schema-dts";
+import {OrganizationSchema} from "@/services/OrganizationSchema";
 
 
 export async function generateStaticParams() {
@@ -39,10 +41,10 @@ export async function generateMetadata(
     const filteredInfo = MaterialsCategory.filter(inf => inf.slug === category);
 
     return {
-        title: filteredInfo[0]?.title ? filteredInfo[0].title +  " от компании «СК Основа» с доставкой недорого в СПб и области - без посредников": category,
-        description: filteredInfo[0]?.subTitleText ? filteredInfo[0].subTitleText : "",
+        title: filteredInfo[0]?.seoTitle ? filteredInfo[0].seoTitle: category,
+        description: filteredInfo[0]?.seoDescription ? filteredInfo[0].seoDescription : "",
         openGraph: {
-            images: ['/some-specific-page-image.jpg'],
+            images: [`${filteredInfo[0].imgUrl}`],
         },
     }
 }
@@ -58,25 +60,121 @@ export default async function SlugMaterialsServer(props: MaterialsPropsInterface
             DeliveryLocationGetAll()
         ]);
         const activeCategory = categories.find(cat => cat.url === params.category);
+
+        const jsonLdBreadcrumbList: WithContext<BreadcrumbList> = {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Главная',
+                    item: process.env.DOMAIN,
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: activeCategory?.name || 'Категория',
+                    item: `${process.env.DOMAIN}/materialy/${params.category}`,
+                }
+            ],
+        };
+
+        let offers: any[] = [];
+
+        if(activeCategory?.id === 4) {
+            offers = materials
+                .filter(material => material.categoryId === activeCategory?.id )
+                .map(material => ({
+                    "@type": "Offer",
+                    "name": material.title,
+                    "description": material.seoDescription,
+                    "price": material.Price_Over_300  ,
+                    "priceCurrency": "RUB",
+                    "url": `${process.env.DOMAIN}/materialy/${activeCategory?.url}/${material.url}`,
+                    "availability": "https://schema.org/InStock"
+                }));
+        }
+
+        if(activeCategory?.id === 5) {
+            offers = materials
+                .filter(material => material.categoryId === activeCategory?.id && (material.sub.length > 0 || (activeCategory?.id === 5 && !material.sub.length) ))
+                .map(material => ({
+                    "@type": "Offer",
+                    "name": material.title,
+                    "description": material.seoDescription,
+                    "price":  (material.Price_Up_To_100 === null && material.sub.length)
+                            ? Math.min(...material.sub.map(sub => sub.Price_Up_To_100))
+                            : material.Price_Up_To_100,
+                    "priceCurrency": "RUB",
+                    "url": `${process.env.DOMAIN}/materialy/${activeCategory?.url}/${material.url}`,
+                    "availability": "https://schema.org/InStock"
+                }));
+        }
+
+
+        const jsonLdServer: WithContext<Product> = {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": infoCategory.title,
+            "description": infoCategory.seoDescription,
+            "image": infoCategory.imgUrl,
+            "offers": {
+                "@type": "AggregateOffer",
+                "priceCurrency": "RUB",
+                "highPrice": activeCategory?.id === 4
+                    ? Math.max(...materials
+                        .filter(item => item.Price_Over_300 !== null)
+                        .map(item => item.Price_Up_To_100))
+                    : Math.max(...materials
+                        .filter(item => item.sub.length > 0)
+                        .flatMap(item => item.sub.map(sub => sub.Price_Up_To_100))
+                    ),
+
+                "lowPrice": activeCategory?.id === 4
+                    ? Math.min(...materials
+                        .filter(item => item.Price_Over_300 !== null)
+                        .map(item => item.Price_Over_300))
+                    : Math.min(...materials
+                        .filter(item => item.sub.length > 0)
+                        .flatMap(item => item.sub.map(sub => sub.Price_Up_To_100))
+                    ),
+                "offerCount": offers.length,
+                "offers": offers
+            }
+        }
         return (
             <div>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLdBreadcrumbList)}}
+                />
+
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLdServer)}}
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{__html: JSON.stringify(OrganizationSchema)}}
+                />
                 <ImagesTitleBlock images={[{url: infoCategory.imgUrl, id: "1", workId: "1"}]}
                                   title={infoCategory.title} lastYear={infoCategory.lastYear}
                                   titleDesc={infoCategory.titleDesc}
-                                  price={infoCategory.price}/>
+                                  price={infoCategory.price} category={'materialy'}/>
 
-                <h1 className={categoryStyles.categoryPages_litleTitle}>{infoCategory.subTitle}</h1>
+                <h3 className={categoryStyles.categoryPages_litleTitle}>{infoCategory.subTitle}</h3>
 
                 <div className={categoryStyles.categoryPages_text}>
                     {infoCategory.subTitleText}
                 </div>
 
-                <h1 className={categoryStyles.categoryPages_titleCenter}>{infoCategory.titleCenter} </h1>
+                <h2 className={categoryStyles.categoryPages_titleCenter}>{infoCategory.titleCenter} </h2>
                 {categories.length ?
                     <WorksItemCard activeCategory={activeCategory} works={works} materials={materials}/> : ""}
 
 
-                <h1 className={categoryStyles.categoryPages_titleCenter}>{infoCategory.titleCenter}</h1>
+                <h2 className={categoryStyles.categoryPages_titleCenter}>{infoCategory.titleCenter}</h2>
 
                 {
                     params.category === 'plodorodnaya-zemlya' ? <table className={styles.fertileLand_priceTable}>
@@ -139,7 +237,7 @@ export default async function SlugMaterialsServer(props: MaterialsPropsInterface
                     целесообразным будет заказать самосвал
                     на несколько домохозяйств.
                 </div>
-                <h1 className={categoryStyles.categoryPages_title}>Рассчитайте стоимость доставки!</h1>
+                <h2 className={categoryStyles.categoryPages_title}>Рассчитайте стоимость доставки!</h2>
                 <YandexMapMarsh materials={materials} categories={categories}
                                 activeCategory={activeCategory ? activeCategory.id.toString() : '1'}
                                 deliveryLocation={deliveryLocationResponse.locations as IDeliveryLocation[]}

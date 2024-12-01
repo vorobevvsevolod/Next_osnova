@@ -14,12 +14,16 @@ const geistSans = localFont({
 
 export const metadata: Metadata = {
   title: "СК ОСНОВА",
-  description: "дорожное строительство и поставка нерудных материалов, нерудные материалы +79219806290, дорожные и земляные работы +79217793317",
+  description: "Дорожное строительство и поставка нерудных материалов, нерудные материалы +79219806290, дорожные и земляные работы +79217793317",
    icons: {
   icon: '/img/logoWeb.png',
       shortcut: '/img/logoWeb.png',
       apple: '/img/logoWeb.png',
   },
+    openGraph:{
+      locale:'ru-RU',
+        type: 'website',
+    }
 };
 
 export default function RootLayout({

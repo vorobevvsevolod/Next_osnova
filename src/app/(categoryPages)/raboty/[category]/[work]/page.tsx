@@ -12,6 +12,8 @@ import {WorksPropsInterface} from "@/app/interfaces/Works/WorksProps.interface";
 import {WorksCategory} from "@/app/(categoryPages)/WorksCategory";
 import {useRouter} from "next/navigation";
 import Link from "next/link";
+import {BreadcrumbList, Product, Service, WithContext} from "schema-dts";
+import {OrganizationSchema} from "@/services/OrganizationSchema";
 
 
 
@@ -36,8 +38,8 @@ export async function generateMetadata(
     const workFind = worksList.find(wo => wo.url === work);
 
     return {
-        title: workFind?.title ? workFind.title + " от компании «СК Основа» с доставкой недорого в СПб и области - без посредников" : null,
-        description: `Заказать ${workFind?.title} в Санкт-Петербурге и Ленинградской области. Оптовые цены. Напрямую без посредников. Звоните и заказывайте.`,
+        title: workFind?.seoTitle ? workFind.seoTitle + " от компании «СК Основа» с доставкой недорого в СПб и области - без посредников" : null,
+        description: workFind?.seoDescription,
         openGraph: {
             images: [`${process.env.NEXT_PUBLIC_API_URL}/${workFind?.images[0].url}`],
             locale: 'ru_RU'
@@ -58,22 +60,87 @@ export default async function WorkPageServer(props: WorksPropsInterface) {
         const activeCategory = categories.find(cat => cat.url === params.category);
         const work = works.find(work => work.url === params.work);
 
+
+        const jsonLdBreadcrumbList: WithContext<BreadcrumbList> = {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Главная',
+                    item: process.env.DOMAIN,
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: activeCategory?.name || 'Категория',
+                    item: `${process.env.DOMAIN}/raboty/${params.category}`,
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: work?.title || 'Работа',
+                    item: `${process.env.DOMAIN}/raboty/${params.category}`,
+                }
+            ],
+        };
+
+
+
+
+
         if(work?.id){
+            const jsonLdServer: WithContext<Product> = {
+                "@context": "https://schema.org",
+                "@type": "Product",
+                "name": work.title,
+                "description": work.seoDescription,
+                "image": work.images[0].url,
+                "brand": {
+                    "@type": "Brand",
+                    "name": "СК Основа"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "priceCurrency": "RUB", // Валюта
+                    "price": work.price.split(';').length !== 1 ? Number(work.price.split(';')[0]) : work.price.split('-').length !== 1 ? Number(work.price.split('-')[0])  : 500,
+                    "url": `${process.env.DOMAIN}/raboty/${activeCategory?.url}/${work?.url}`,
+                    "availability": "https://schema.org/InStock"
+                }
+            };
+
             return (
                 <div className={styles.workItem_container}>
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLdBreadcrumbList)}}
+                    />
+
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLdServer)}}
+                    />
+
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{__html: JSON.stringify(OrganizationSchema)}}
+                    />
 
                     <div className={categoryStyles.categoryPages_bread}>
                         <Link href="/" className={categoryStyles.categoryPages_bread_link}>Главная</Link>
                         <span>/</span>
-                        <Link href={`/raboty/${activeCategory?.url}`} className={categoryStyles.categoryPages_bread_link}>{activeCategory?.name}</Link>
+                        <Link href={`/raboty/${activeCategory?.url}`}
+                              className={categoryStyles.categoryPages_bread_link}>{activeCategory?.name}</Link>
                         <span>/</span>
 
-                        <span className={ `${categoryStyles.categoryPages_bread_link_last} ${categoryStyles.categoryPages_bread_link}`}>{work.title}</span>
+                        <span
+                            className={`${categoryStyles.categoryPages_bread_link_last} ${categoryStyles.categoryPages_bread_link}`}>{work.title}</span>
                     </div>
 
 
                     {work && <ImagesTitleBlock images={work.images} title={work.title} titleDesc={work.descriptionTitle}
-                                               lastYear={work.lastYear}/>}
+                                               lastYear={work.lastYear} category={'raboty'}/>}
 
 
                     {
@@ -104,7 +171,8 @@ export default async function WorkPageServer(props: WorksPropsInterface) {
                             <td className={styles.workItem_priceTable_body_title}>{work.priceDescription}</td>
                             <td className={styles.workItem_priceTable_body_subtitle}>
                                 {work.price === "смета" ?
-                                    <strong className={styles.workItem_priceTable_price}> смета </strong> : activeCategory?.id === 1 ? <>от <strong
+                                    <strong
+                                        className={styles.workItem_priceTable_price}> смета </strong> : activeCategory?.id === 1 ? <>от <strong
                                         className={styles.workItem_priceTable_price}>{work.price} </strong> (в
                                         зависимости от толщины слоя дорожной одежды)</> : <>от <strong
                                         className={styles.workItem_priceTable_price}>{work.price} </strong> </>}
