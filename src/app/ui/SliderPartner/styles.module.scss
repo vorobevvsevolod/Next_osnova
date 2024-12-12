@@ -1,0 +1,38 @@
+.sliderPartner{
+  padding: 10px 15px 10px 30px;
+  &_title{
+    margin: 50px 0 20px 0;
+    font-size: 30px;
+    color: #313131;
+    position: relative;
+    font-weight: 800;
+
+    span{
+      font-weight: 500;
+      color: #484343;
+
+    }
+
+    &:after {
+      width: 100px;
+      height: 2px;
+      background-color: #14a414;
+      margin: 15px 0 0 0;
+      display: block;
+      content: "";
+    }
+  }
+
+  &_slide{
+    display:  flex;
+
+    align-items: center;
+    justify-items: center;
+
+    img{
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+}

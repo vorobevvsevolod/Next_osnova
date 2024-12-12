@@ -220,24 +220,26 @@ export default async function MaterialPageServer(props: MaterialsPropsInterface)
                             material.materialProperties.list.length ?
                                 <>
                                     <h2 className={categoryStyles.categoryPages_title}> Свойства материала</h2>
-                                    {
-                                        material.materialProperties.list.map((list, index) => {
-                                            const text = list.name.split(':');
-                                            return (
-                                                <div className={styles.workItem_priceFactor_item} key={list.id}>
-                                                    <img width={30} height={30} src="/img/rostok.png" alt="rostok"/>
-                                                    <div className={styles.workItem_need_item_text}>
-                                                        <span>{text[0]}:</span>{text[1]}
+                                    <div className={styles.workItem_properties}>
+                                        {
+                                            material.materialProperties.list.map((list, index) => {
+                                                const text = list.name.split(':');
+                                                return (
+                                                    <div className={styles.workItem_properties_item} key={list.id}>
+                                                        <div className={styles.workItem_properties_item_index}>0{index + 1}</div>
+                                                        <div className={styles.workItem_properties_item_title}> <p>{text[0]}</p></div>
+                                                        <div className={styles.workItem_properties_item_text}>{text[1]}</div>
                                                     </div>
-                                                </div>
-                                            )
-                                        })
-                                    }
+                                                )
+                                            })
+                                        }
+                                    </div>
                                 </>
                                 : <></>
                         }
 
                     </div>
+
                     {
                         material.categoryId && material.sub && material.sub.length ? (
                             <>

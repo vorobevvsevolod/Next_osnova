@@ -169,19 +169,20 @@ export default async function MaterialPageServer(props: MaterialsPropsInterface)
                             material.materialProperties.list.length ?
                                 <>
                                     <h2 className={categoryStyles.categoryPages_title}> Свойства материала</h2>
-                                    {
-                                        material.materialProperties.list.map((list, index) => {
-                                            const text = list.name.split(':');
-                                            return (
-                                                <div className={styles.workItem_priceFactor_item} key={list.id}>
-                                                    <img width={30} height={30} src="/img/rostok.png" alt="rostok"/>
-                                                    <div className={styles.workItem_need_item_text}>
-                                                        <span>{text[0]}:</span>{text[1]}
+                                    <div className={styles.workItem_properties}>
+                                        {
+                                            material.materialProperties.list.map((list, index) => {
+                                                const text = list.name.split(':');
+                                                return (
+                                                    <div className={styles.workItem_properties_item} key={list.id}>
+                                                        <div className={styles.workItem_properties_item_index}>0{index + 1}</div>
+                                                        <div className={styles.workItem_properties_item_title}> <span>{text[0]}</span></div>
+                                                        <div className={styles.workItem_properties_item_text}>{text[1]}</div>
                                                     </div>
-                                                </div>
-                                            )
-                                        })
-                                    }
+                                                )
+                                            })
+                                        }
+                                    </div>
                                 </>
                                 : <></>
                         }
@@ -249,24 +250,6 @@ export default async function MaterialPageServer(props: MaterialsPropsInterface)
                             {material.description}
                         </div> : <></>
                     }
-                    <div className={styles.workItem_priceFactor}>
-                        {
-                            material.priceFactor.list.length ?
-                                <>
-                                    <h2 className={categoryStyles.categoryPages_title}> На цену строительства влияют
-                                        несколько факторов:</h2>
-                                    {
-                                        material.priceFactor.list.map((list, index) => (
-                                            <div className={styles.workItem_priceFactor_item} key={list.id}>
-                                                <img width={30} height={30} src="/img/rostok.png" alt="rostok"/>
-                                                <div className={styles.workItem_priceFactor_item_text}>{list.name}</div>
-                                            </div>
-                                        ))
-                                    }
-                                </>
-                                : <></>
-                        }
-                    </div>
 
                     <h2 className={categoryStyles.categoryPages_title}>Быстрая и недорогая доставка материалов</h2>
                     <div className={categoryStyles.categoryPages_subTitle}>

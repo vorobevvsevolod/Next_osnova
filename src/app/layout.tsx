@@ -4,6 +4,7 @@ import "./scss/globals.scss";
 
 import HeaderServer from "@/app/ui/Header/header.server";
 import HeaderTop from "@/app/ui/HeaderTop/headerTop";
+import SliderPartner from "@/app/ui/SliderPartner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -40,6 +41,7 @@ export default function RootLayout({
             <div className={'container'}>
               {children}
             </div>
+            <SliderPartner/>
           </div>
       </body>
     </html>
