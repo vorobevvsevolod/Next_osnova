@@ -34,14 +34,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} `}>
+      <body className={`${geistSans.variable}`}>
         <HeaderServer/>
-          <div className={`${geistSans.variable} main `}>
+          <div className={`${geistSans.variable} main`}>
           <HeaderTop/>
             <div className={'container'}>
               {children}
+              <SliderPartner/>
             </div>
-            <SliderPartner/>
+
           </div>
       </body>
     </html>

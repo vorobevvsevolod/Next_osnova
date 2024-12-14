@@ -41,7 +41,18 @@
       padding: 20px 15px;
       font-size: 15px;
       font-weight: 700;
-      color: #727272;
+      color: #838383;
+
+      &_title{
+        color: #3b3b3b;
+        font-weight: 800;
+        font-size: 17px;
+      }
+
+      &_text{
+        color: #3b3b3b;
+      }
+
       span {
         font-size: 17px;
         font-weight: 700;

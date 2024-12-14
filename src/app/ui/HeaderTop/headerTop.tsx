@@ -56,7 +56,7 @@ const HeaderTop: React.FC = () => {
                     <Link href="/" className={styles.headerSub_bottom_nav_link}>
                         Главная
                     </Link>
-                    <Link href="/gallery_works" className={styles.headerSub_bottom_nav_link}>
+                    <Link href="/galereya-rabot" className={styles.headerSub_bottom_nav_link}>
                         Галерея работ
                     </Link>
                     <Link href="/contact" className={styles.headerSub_bottom_nav_link}>

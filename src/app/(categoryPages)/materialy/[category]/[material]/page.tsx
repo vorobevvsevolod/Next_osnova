@@ -210,10 +210,43 @@ export default async function MaterialPageServer(props: MaterialsPropsInterface)
                                                    titleDesc={material.descriptionTitle} lastYear={material.lastYear}
                                                    price={material.Price_Over_300 ? material.Price_Over_300 : material?.sub.length ? Math.min(...material.sub.map(sub => sub.Price_Up_To_100)) : material.Price_Up_To_100}
                                                    category={'materialy'}/>}
-                    <h2 className={categoryStyles.categoryPages_litleTitle}>Особенности материала</h2>
+                    <h2 className={categoryStyles.categoryPages_litleTitle}>{material.id === 26 ? "Открыта новая площадка плодородной земли" : "Особенности материала"}</h2>
                     <div className={categoryStyles.categoryPages_text}>
                         {material.features}
                     </div>
+
+                    {
+                        material.id === 26 ?
+                            <>
+                                <h2 className={categoryStyles.categoryPages_title}>Стоимость </h2>
+                                <table className={styles.workItem_priceTable}>
+                                    <thead>
+                                    <tr>
+                                        <td className={styles.workItem_priceTable_head}>Наименование</td>
+                                        <td className={styles.workItem_priceTable_head}>Стоимость руб./м2</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody className={styles.workItem_priceTable_body}>
+                                    <tr>
+                                        <td className={styles.workItem_priceTable_body_title}>{material.priceDescription.split(";")[0]}</td>
+                                        <td className={styles.workItem_priceTable_body_subtitle}>
+                                            <>от <strong
+                                                className={styles.workItem_priceTable_price}>{material.Price_Up_To_100}</strong>р </>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td className={styles.workItem_priceTable_body_title}>{material.priceDescription.split(";")[1]}</td>
+                                        <td className={styles.workItem_priceTable_body_subtitle}>
+                                            <>от <strong
+                                                className={styles.workItem_priceTable_price}>{material.Price_Over_300}</strong>р </>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </>
+                            : <></>
+                    }
 
                     <div className={styles.workItem_priceFactor}>
                         {
@@ -226,9 +259,12 @@ export default async function MaterialPageServer(props: MaterialsPropsInterface)
                                                 const text = list.name.split(':');
                                                 return (
                                                     <div className={styles.workItem_properties_item} key={list.id}>
-                                                        <div className={styles.workItem_properties_item_index}>0{index + 1}</div>
-                                                        <div className={styles.workItem_properties_item_title}> <p>{text[0]}</p></div>
-                                                        <div className={styles.workItem_properties_item_text}>{text[1]}</div>
+                                                        <div
+                                                            className={styles.workItem_properties_item_index}>0{index + 1}</div>
+                                                        <div className={styles.workItem_properties_item_title}>
+                                                            <p>{text[0]}</p></div>
+                                                        <div
+                                                            className={styles.workItem_properties_item_text}>{text[1]}</div>
                                                     </div>
                                                 )
                                             })
@@ -251,7 +287,7 @@ export default async function MaterialPageServer(props: MaterialsPropsInterface)
                     }
 
 
-                    {material.categoryId && !material.sub.length ? <>
+                    {material.categoryId && !material.sub.length && material.id !== 26 && material.id !== 21 ? <>
                         <h1 className={categoryStyles.categoryPages_title}>Рассчитайте стоимость доставки!</h1>
 
                         <YandexMapMarsh materials={materials} categories={categories}
@@ -259,15 +295,32 @@ export default async function MaterialPageServer(props: MaterialsPropsInterface)
                                         deliveryLocation={deliveryLocationResponse.locations as IDeliveryLocation[]}
                                         materialFromLocation={deliveryLocationResponse.materialFromLocation as IMaterialFromLocation[]}/>
                     </> : ""}
-                    <h2 className={categoryStyles.categoryPages_title}>Минимальный заказ от 12 кубов!</h2>
 
-                    <div className={categoryStyles.categoryPages_descriptionMin}>
-                        Это означает, что
-                        при заказе меньшего
-                        количества продукции цена будет несколько выше или вовсе отказано в доставке. Возможно,
-                        целесообразным будет заказать самосвал
-                        на несколько домохозяйств.
-                    </div>
+                    {
+                        material.id === 26 ?
+                            <>
+                                <h2 className={categoryStyles.categoryPages_title}>Проведены исследования земли!</h2>
+
+                                <div className={categoryStyles.categoryPages_descriptionMin}>
+                                    {material.description}
+                                </div>
+                            </> :
+                            <>
+                                <h2 className={categoryStyles.categoryPages_title}>Минимальный заказ 12 кубов!</h2>
+
+                                <div className={categoryStyles.categoryPages_descriptionMin}>
+                                    Это означает, что
+                                    при заказе меньшего
+                                    количества продукции цена будет несколько выше или вовсе отказано в доставке.
+                                    Возможно,
+                                    целесообразным будет заказать самосвал
+                                    на несколько домохозяйств.
+                                </div>
+                            </>
+                    }
+
+
+
 
                     <div className={styles.workItem_priceFactor}>
                         {
@@ -275,7 +328,7 @@ export default async function MaterialPageServer(props: MaterialsPropsInterface)
                                 <>
                                     <h2 className={categoryStyles.categoryPages_title}>{material.need.title}</h2>
                                     <div className={categoryStyles.categoryPages_subTitle}>
-                                        {material.need.description}
+                                    {material.need.description}
                                     </div>
                                     <div className={styles.workItem_need}>
                                         {
@@ -296,35 +349,27 @@ export default async function MaterialPageServer(props: MaterialsPropsInterface)
                     </div>
 
 
-                    <div className={styles.workItem_priceFactor}>
-                        {
-                            material.priceFactor.list.length ?
-                                <>
-                                    <h2 className={categoryStyles.categoryPages_title}> На цену строительства влияют
-                                        несколько факторов:</h2>
-                                    {
-                                        material.priceFactor.list.map((list, index) => (
-                                            <div className={styles.workItem_priceFactor_item} key={list.id}>
-                                                <img width={30} height={30} src="/img/rostok.png" alt="rostok"/>
-                                                <div className={styles.workItem_priceFactor_item_text}>{list.name}</div>
-                                            </div>
-                                        ))
-                                    }
-                                </>
-                                : <></>
-                        }
-                    </div>
+                    {
+                        material.id !== 26 ?
+                            <>
+                                <h2 className={categoryStyles.categoryPages_title}>Быстрая и недорогая доставка
+                                    материалов</h2>
+                                <div className={categoryStyles.categoryPages_subTitle}>
+                                    СК «Основа» — компания, которой доверяют. Мы работаем с 2007 года, за это время
+                                    показали себя
+                                    как надежный и ответственный партнер и поставщик нерудных материалов. Сделать заявку
+                                    на расчет
+                                    стоимости асфальтовой дороги, площадки, парковки вы всегда можете онлайн или по
+                                    телефону.
+                                    Построенные нами дороги ежедневно выдерживают большие нагрузки, без проблем
+                                    переносят любые
+                                    погодные изменения, долго не нуждаются в ремонте благодаря тщательному соблюдению
+                                    строгих
+                                    стандартов качества материалов и технологий укладки асфальта.
+                                </div>
+                            </> : <></>
+                    }
 
-
-                    <h2 className={categoryStyles.categoryPages_title}>Быстрая и недорогая доставка материалов</h2>
-                    <div className={categoryStyles.categoryPages_subTitle}>
-                        СК «Основа» — компания, которой доверяют. Мы работаем с 2007 года, за это время показали себя
-                        как надежный и ответственный партнер и поставщик нерудных материалов. Сделать заявку на расчет
-                        стоимости асфальтовой дороги, площадки, парковки вы всегда можете онлайн или по телефону.
-                        Построенные нами дороги ежедневно выдерживают большие нагрузки, без проблем переносят любые
-                        погодные изменения, долго не нуждаются в ремонте благодаря тщательному соблюдению строгих
-                        стандартов качества материалов и технологий укладки асфальта.
-                    </div>
                     <h2 className={categoryStyles.categoryPages_title}>Преимущества сотрудничества с СК «ОСНОВА»</h2>
                     <div className={categoryStyles.categoryPages_subTitle}>В нашей компании есть собственный автопарк,
                         за

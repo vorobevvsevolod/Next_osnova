@@ -8,8 +8,8 @@ import Image from "next/image";
 const SliderPartner : React.FC = () => {
     const sliderSettings = {
         speed: 500, // Скорость анимации
-        slidesToShow: 3, // Количество слайдов на экране
-        slidesToScroll: 3, // Прокрутка по 1 слайду
+        slidesToShow: 4, // Количество слайдов на экране
+        slidesToScroll: 2, // Прокрутка по 1 слайду
         dots: true,
         autoplay: true,
         arrows: true,

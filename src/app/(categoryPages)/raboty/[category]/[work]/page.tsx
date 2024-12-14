@@ -158,28 +158,59 @@ export default async function WorkPageServer(props: WorksPropsInterface) {
                     </div>
                     <h2 className={categoryStyles.categoryPages_title}>Стоимость </h2>
 
+                    {
+                        work.price.split(';').length === 1
+                            ? <table className={styles.workItem_priceTable}>
+                                <thead>
+                                <tr>
+                                    <td className={styles.workItem_priceTable_head}>Наименование</td>
+                                    <td className={styles.workItem_priceTable_head}>Стоимость руб./м2</td>
+                                </tr>
+                                </thead>
+                                <tbody className={styles.workItem_priceTable_body}>
+                                <tr>
+                                    <td className={styles.workItem_priceTable_body_title}>{work.priceDescription}</td>
+                                    <td className={styles.workItem_priceTable_body_subtitle}>
+                                        {work.price === "смета" ?
+                                            <strong className={styles.workItem_priceTable_price}> смета </strong>
+                                            : activeCategory?.id === 1 ? <> от <strong
+                                                    className={styles.workItem_priceTable_price}>{work.price} </strong> (в
+                                                    зависимости от толщины слоя дорожной одежды)</>
+                                                : <>от <strong className={styles.workItem_priceTable_price}>{work.price} </strong> </>
 
-                    <table className={styles.workItem_priceTable}>
-                        <thead>
-                        <tr>
-                            <td className={styles.workItem_priceTable_head}>Наименование</td>
-                            <td className={styles.workItem_priceTable_head}>Стоимость руб./м2</td>
-                        </tr>
-                        </thead>
-                        <tbody className={styles.workItem_priceTable_body}>
-                        <tr>
-                            <td className={styles.workItem_priceTable_body_title}>{work.priceDescription}</td>
-                            <td className={styles.workItem_priceTable_body_subtitle}>
-                                {work.price === "смета" ?
-                                    <strong
-                                        className={styles.workItem_priceTable_price}> смета </strong> : activeCategory?.id === 1 ? <>от <strong
-                                        className={styles.workItem_priceTable_price}>{work.price} </strong> (в
-                                        зависимости от толщины слоя дорожной одежды)</> : <>от <strong
-                                        className={styles.workItem_priceTable_price}>{work.price} </strong> </>}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                                        }
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            : <table className={styles.workItem_priceTable}>
+                                <thead>
+                                <tr>
+                                    <td className={styles.workItem_priceTable_head}>Наименование</td>
+                                    <td className={styles.workItem_priceTable_head}>Стоимость руб./м2</td>
+                                </tr>
+                                </thead>
+                                <tbody className={styles.workItem_priceTable_body}>
+                                <tr>
+                                    <td className={styles.workItem_priceTable_body_title}>{work.priceDescription.split(";")[0]}</td>
+                                    <td className={styles.workItem_priceTable_body_subtitle}>
+                                      <>от <strong className={styles.workItem_priceTable_price}>{work.price.split(";")[0]}р </strong> </>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td className={styles.workItem_priceTable_body_title}>{work.priceDescription.split(";")[1]}</td>
+                                    <td className={styles.workItem_priceTable_body_subtitle}>
+                                        <>от <strong
+                                            className={styles.workItem_priceTable_price}>{work.price.split(";")[1]}р </strong> </>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                    }
+
 
                     <div className={styles.workItem_priceFactor}>
                         {

@@ -1,5 +1,5 @@
 .sliderPartner{
-  padding: 10px 15px 10px 30px;
+  padding: 10px 15px 10px 0px;
   &_title{
     margin: 50px 0 20px 0;
     font-size: 30px;
@@ -24,15 +24,13 @@
   }
 
   &_slide{
-    display:  flex;
-
-    align-items: center;
-    justify-items: center;
 
     img{
-      width: 100%;
+      display: block;
+      width: 70%;
       height: auto;
       object-fit: contain;
+      margin: 0 auto;
     }
   }
 }

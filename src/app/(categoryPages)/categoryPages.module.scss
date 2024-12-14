@@ -1,4 +1,43 @@
 .categoryPages{
+
+
+  &_priceTable{
+    width: 100%;
+    -webkit-box-shadow: 0 0 6px 0 rgba(34,31,31,.15);
+    box-shadow: 0 0 6px 0 rgba(34,31,31,.15);
+    border-radius: 3px;
+    margin-bottom: 20px;
+    &_head{
+      background-color: #14a414;
+      text-transform: uppercase;
+      font-weight: 800;
+      padding: 20px;
+      color: white;
+    }
+
+    &_body{
+      &_subtitle{
+        color: #6e6e6e;
+        font-weight: 600;
+        padding: 20px;
+        background-color: white;
+      }
+
+      &_title{
+        color: black;
+        font-weight: 600;
+        padding: 20px;
+        background-color: white;
+      }
+
+    }
+    &_price{
+      color: #14a414;
+      font-size: 18px;
+    }
+  }
+
+
   &_title{
     margin: 50px 0 20px 0;
     font-size: 30px;
@@ -109,6 +148,33 @@
       &_last{
         color: #339933;
       }
+    }
+  }
+
+  &_btnLink{
+    justify-content: center;
+    display: flex;
+
+    border: 1px solid #14a414;
+    padding: 10px 15px;
+    border-radius: 25px;
+    transition: all .2s ease-in-out;
+
+    &:hover{
+      background-color: #14a414;
+
+    }
+    &:hover &_text{
+      color: #fff;
+      letter-spacing: 1px;
+
+    }
+
+    &_text{
+      transition: all .2s ease-in-out;
+      color: #000;
+      font-size: 20px;
+      font-weight: 600;
     }
   }
 }
