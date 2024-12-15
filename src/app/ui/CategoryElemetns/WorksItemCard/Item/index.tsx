@@ -39,7 +39,7 @@ const Item: React.FC<{ work: IWork; activeCategoryUrl: string }> = (props) => {
                     work.price === "смета" ? <span>{work.price}</span>
                         : (
                             work.price.split(";").length !== 1
-                            ? <>от <span>{work.price.split(";")[0]}</span>р; от <span>{work.price.split(";")[1]}</span>р</>
+                            ? <>от <span>{work.price.split(";")[0]}</span>р от <span>{work.price.split(";")[1]}</span>р</>
                             : work.price.split(":").length !== 1 ?  <>от <span>{work.price.split(":")[0]}</span>р до <span>{work.price.split(":")[1]}</span>р</> :
                                     (
                                         work.price.split("-").length !== 1 ? <>от <span>{work.price.split("-")[0]}</span>р до <span>{work.price.split("-")[1]}</span>р</> : <>от <span>{work.price}</span>р</>

@@ -41,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({ categories }) => {
                     <div className={styles.header__logo}>
                         <div>
                             <h1>СК Основа</h1>
-                            <p>Путь качества в каждой горсти</p>
+                            <p>РАБОТАЕМ С 2007 ГОДА</p>
                         </div>
                     </div>
                 </Link>
@@ -109,10 +109,22 @@ const Header: React.FC<HeaderProps> = ({ categories }) => {
                             )}
                         </div>
                     ))}
+                    <div
+                        className={`${styles.link} `}
+                    >
+                        <Link
+                            href={`/`}
+                        >
+                            <div className={styles.header_left_img}>
+                                123
+                            </div>
+                        </Link>
+
+                        </div>
                 </nav>
             </div>
         </header>
-    );
+);
 };
 
 export default Header;
