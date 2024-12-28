@@ -18,8 +18,10 @@ import {ICategory} from "@/app/interfaces/ICategory.interface";
 import {IMaterial} from "@/app/interfaces/Materials/IMaterial.interface";
 import {IWork} from "@/app/interfaces/Works/IWork.interface";
 import {IGalleryWorks} from "@/app/interfaces/Works/IGalleryWorks.interface";
-import {OrganizationSchema} from "@/services/OrganizationSchema";
 import ImagesTitleBlock from "@/app/ui/ImagesTitleBlock";
+import {IPriceFactor} from "@/app/interfaces/IPriceFactor.interface";
+import {INeed} from "@/app/interfaces/INeed.interface";
+import {IImages} from "@/app/interfaces/IImages.interface";
 
 interface Props {
     categories: ICategory[],
@@ -33,13 +35,24 @@ interface Props {
 }
 
 export default function HomePageClient(props: Props) {
-    // Функция для получения работ для определенной категории
-    const getWorksForCategory = (categoryId: number) => props.works.filter(work => work.categoryId === categoryId);
+    const getWorksForCategory = React.useCallback(
+        (categoryId: number) => props.works.filter(work => work.categoryId === categoryId),
+        [props.works]
+    );
 
-    // Функция для получения материалов для категории
-    const getMaterialsForCategory = (categoryId: number) => props.materials.filter(mat => mat.categoryId === categoryId);
+    const getMaterialsForCategory = React.useCallback(
+        (categoryId: number) => props.materials.filter(mat => mat.categoryId === categoryId),
+        [props.materials]
+    );
 
-    const vyvozSnega = props.works.find(work => work.id === 17);
+    const [vyvozSnega, setVyvozSnega] = React.useState<IWork | undefined>(undefined);
+
+    React.useEffect(() => {
+        if (props.works.length) {
+            const work = props.works.find(work => work.id === 17);
+            setVyvozSnega(work);
+        }
+    }, [props.works]);
 
     return (
         <div>
@@ -47,7 +60,7 @@ export default function HomePageClient(props: Props) {
             {/*Зимой*/}
                 <h2 className={categoryStyles.categoryPages_title}>Ваш надежный партнер в борьбе со снегом!</h2>
             {
-                vyvozSnega?.id ?
+                  vyvozSnega?.id ?
                     <>
                         <ImagesTitleBlock images={vyvozSnega.images} title={vyvozSnega.title}
                                           titleDesc={vyvozSnega.descriptionTitle}
@@ -106,12 +119,12 @@ export default function HomePageClient(props: Props) {
             {/*/>*/}
 
             {/* Заголовок для раздела дорожного строительства */}
-            <h2 style={{margin: "40px 0px 0px 0px"}} className={categoryStyles.categoryPages_titleCenter}>
+            <h2 style={{margin: "40px 0px 0px 0px", color: '#6e6e6e'}} className={categoryStyles.categoryPages_titleCenter}>
                 Дорожное строительство <br/> и поставка строительных материалов
             </h2>
 
             {/* Рендерим работы для каждой категории */}
-            {props.categories.map(category => {
+            {props.categories && props.categories?.length && props.categories.map(category => {
                 if (category.typeOfServiceId === 1) {
                     const filteredWorks = getWorksForCategory(category.id);
 
@@ -123,8 +136,11 @@ export default function HomePageClient(props: Props) {
                                     href={`/raboty/${category.url}`}
                                     className={styles.TitleCategory}
                                 >
-                                    <p className={styles.TitleCategory_text}>{category.name}</p>
-                                    <img width={40} height={40} src="/img/back.svg" alt=""/>
+                                    <div style={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
+                                        <p className={styles.TitleCategory_text}>{category.name}</p>
+                                        <img width={40} height={40} src="/img/back.svg" alt=""/>
+                                    </div>
+
                                 </Link>
                                 </h2>
                                 <div className={styles.containerItem}>
@@ -145,7 +161,7 @@ export default function HomePageClient(props: Props) {
 
                                     </div>
                                     <div className={styles.containerItem_right}>
-                                        {filteredWorks.slice(1, 3).map((work, index) => (
+                                        {filteredWorks && filteredWorks?.length && filteredWorks.slice(1, 3).map((work, index) => (
                                             <div
                                                 key={index}
                                                 className={`${styles.containerItem_right_item} ${index === 0 ? styles.containerItem_right_item_top : styles.containerItem_right_item_bottom} `}
@@ -160,6 +176,7 @@ export default function HomePageClient(props: Props) {
                                                         href={`/raboty/${category.url}/${work.url}`}
                                                         className={styles.containerItem_right_item_title}
                                                     >
+
                                                         {work.title}
                                                         <img className={styles.containerItem_right_item_title_img}
                                                              src="/img/back.svg" alt=""/>
@@ -176,7 +193,7 @@ export default function HomePageClient(props: Props) {
                             <>
                                 <h3 className={categoryStyles.categoryPages_title}>{category.name}</h3>
                                 <div className={styles.containerItem}>
-                                    {filteredWorks.slice(0, 2).map((work, index) => (
+                                    {filteredWorks && filteredWorks?.length && filteredWorks.slice(0, 2).map((work, index) => (
                                         <div key={index}
                                              className={index === 0 ? styles.containerItem_left : styles.containerItem_right}>
                                             <img
@@ -211,7 +228,7 @@ export default function HomePageClient(props: Props) {
             />
 
             {/* Рендерим материалы для каждой категории с подкатегориями */}
-            {props.categories.map((category) => {
+            {props.categories && props.categories?.length && props.categories.map((category) => {
                 if (category.typeOfServiceId === 2) {
                     const filteredMaterials = getMaterialsForCategory(category.id);
 
@@ -221,11 +238,11 @@ export default function HomePageClient(props: Props) {
                         slidesToScroll: 3, // Прокрутка по 1 слайду
                         dots: true,
                         autoplay: true,
-                        arrows: true,
                         autoplaySpeed: 5000,
+                        className: styles.sliderItem,
                         responsive: [
                             {
-                                breakpoint: 1024, // Для экранов меньше 1024px
+                                breakpoint: 900, // Для экранов меньше 1024px
                                 settings: {
                                     slidesToShow: 2, // Показываем 2 слайда
                                     slidesToScroll: 2,
@@ -243,38 +260,40 @@ export default function HomePageClient(props: Props) {
 
                     return (
                         <div key={category.id}>
-                            <h2 className={categoryStyles.categoryPages_title}><
+                            <h2 className={categoryStyles.categoryPages_title} style={{marginTop: '50px'}}><
                                 Link
                                 href={`/materialy/${category.url}`}
                                 className={styles.TitleCategory}
                             >
-                                <p className={styles.TitleCategory_text}>{category.name}</p>
-                                <img width={40} height={40} src="/img/back.svg" alt=""/>
+                                <div style={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
+                                    <p className={styles.TitleCategory_text}>{category.name}</p>
+                                    <img width={40} height={40} src="/img/back.svg" alt=""/>
+                                </div>
                             </Link>
                             </h2>
 
                             <Slider {...sliderSettings}>
-                                {filteredMaterials.map((material) => {
+                                {filteredMaterials && filteredMaterials?.length && filteredMaterials.map((material) => {
                                     if (material.sub.length) {
                                         return material.sub.map((sub) => (
-                                            <div key={sub.id} className={styles.containerItemCardSlider_item}>
                                                 <Item
                                                     work={{...sub, price: String(sub.Price_Up_To_100)}}
                                                     activeCategoryUrl={`materialy/${category.url}/${material.url}`}
+                                                    height={'550px'}
+                                                    key={material.id}
                                                 />
-                                            </div>
                                         ));
                                     } else {
                                         return (
-                                            <div key={material.id} className={styles.containerItemCardSlider_item}>
                                                 <Item
                                                     work={{
                                                         ...material,
                                                         price: material.Price_Over_300 ? `${String(material.Price_Over_300)}:${String(material.Price_Up_To_100)}` : String(material.Price_Up_To_100),
                                                     }}
                                                     activeCategoryUrl={`materialy/${category.url}`}
+                                                    height={'550px'}
+                                                    key={material.id}
                                                 />
-                                            </div>
                                         );
                                     }
                                 })}

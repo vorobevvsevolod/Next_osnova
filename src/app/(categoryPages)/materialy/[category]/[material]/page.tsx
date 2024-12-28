@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 import {Metadata, ResolvingMetadata} from "next";
 const WorksItemCard = dynamic(() => import("@/app/ui/CategoryElemetns/WorksItemCard"));
 import React from "react";
-import styles from './styles.module.scss';
+import styles from '../../../workItem.module.scss';
 import categoryStyles from "../../../categoryPages.module.scss";
 import ImagesTitleBlock from "@/app/ui/ImagesTitleBlock";
 import YandexMapMarsh from "@/app/ui/YandexMapMarsh";
@@ -322,7 +322,7 @@ export default async function MaterialPageServer(props: MaterialsPropsInterface)
 
 
 
-                    <div className={styles.workItem_priceFactor}>
+                    <div className={categoryStyles.categoryPages_priceFactor}>
                         {
                             material?.need?.list.length ?
                                 <>
@@ -330,12 +330,12 @@ export default async function MaterialPageServer(props: MaterialsPropsInterface)
                                     <div className={categoryStyles.categoryPages_subTitle}>
                                     {material.need.description}
                                     </div>
-                                    <div className={styles.workItem_need}>
+                                    <div className={categoryStyles.categoryPages_need}>
                                         {
                                             material.need.list.map((list, index) => (
-                                                <div className={styles.workItem_need_item} key={list.id}>
+                                                <div className={categoryStyles.categoryPages_need_item} key={list.id}>
                                                     <img width={30} height={30} src="/img/rostok.png" alt="rostok"/>
-                                                    <div className={styles.workItem_need_item_text}>
+                                                    <div className={categoryStyles.categoryPages_need_item_text}>
                                                         <span>{list.name}:</span>{list.description}
                                                     </div>
                                                 </div>

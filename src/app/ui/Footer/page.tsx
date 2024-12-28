@@ -15,10 +15,10 @@ export default async function Footer(){
                         <Link href="/" className={styles.footer_top_nav_link}>
                             Главная
                         </Link>
-                        <Link href="/galereya-rabot" className={styles.footer_top_nav_link}>
+                        <Link href="/galereya" className={styles.footer_top_nav_link}>
                             Галерея работ
                         </Link>
-                        <Link href="/contact" className={styles.footer_top_nav_link}>
+                        <Link href="/kontakty" className={styles.footer_top_nav_link}>
                             Контакты
                         </Link>
                     </nav>
@@ -27,7 +27,7 @@ export default async function Footer(){
             <div className={styles.footer_bottom}>
                 <div className={styles.footer_bottom_item}>
                     <div className={styles.footer_bottom_item_logo}>
-                        <div className={styles.footer_bottom_item_logo_title}>СК ОСНОВА</div>
+                        <h2 className={styles.footer_bottom_item_logo_title}>СК ОСНОВА</h2>
                         <div className={styles.footer_bottom_item_logo_subTitle}>РАБОТАЕМ С 2007 ГОДА</div>
 
                         <div className={styles.footer_bottom_item_logo_text}>
@@ -86,15 +86,15 @@ export default async function Footer(){
                             </a>
                         </div>
 
-                        <div className={styles.footer_bottom_item_contact_item_title} style={{marginLeft: '20px'}}>
+                        <div className={styles.footer_bottom_item_contact_item_title}>
                             <div className={styles.footer_bottom_item_contact_item_title_container}>
+                                <Image width={18} height={18} src="/img/email.png" alt="call"/>
                                 <span>Электронная почта:</span>
                             </div>
 
                             <a
                                 className={styles.footer_bottom_item_contact_item_number}
                                 href="mailto:osnova-stroy@mail.ru"
-                                style={{marginLeft: '10px'}}
                             >
                                 osnova-stroy@mail.ru
                             </a>
@@ -103,9 +103,9 @@ export default async function Footer(){
                 </div>
                 <div className={styles.footer_bottom_item}>
                     <Link href={'https://yandex.ru/profile/1258767703?no-distribution=1&view-state=mini&source=wizbiz_new_map_single'} style={{cursor: 'pointer'}}>
-                        <Image src={'/img/mapFooter.png'} alt={'mapFooter'} width={220} height={160} style={{ borderRadius: '5px' }} />
+                        <Image src={'/img/mapFooter.png'} alt={'mapFooter'} width={220} height={160} className={styles.footer_bottom_item_map_img}/>
 
-                        <p style={{ fontSize: '12px',  color: '#a1a9a9' }}>
+                        <p className={styles.footer_bottom_item_map_address}>
                             199106, Санкт-Петербург, <br/>
                             Липовая аллея, 9
                         </p>

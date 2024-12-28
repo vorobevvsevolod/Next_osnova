@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 import {Metadata, ResolvingMetadata} from "next";
 const WorksItemCard = dynamic(() => import("@/app/ui/CategoryElemetns/WorksItemCard"));
 import React from "react";
-import styles from './styles.module.scss';
+import styles from '../../../../workItem.module.scss';
 import categoryStyles from "../../../../categoryPages.module.scss";
 import ImagesTitleBlock from "@/app/ui/ImagesTitleBlock";
 import YandexMapMarsh from "@/app/ui/YandexMapMarsh";
@@ -37,7 +37,7 @@ export async function generateStaticParams() {
                     type: matSub.url
                 }))
             )
-    ).filter(Boolean); // Фильтруем пустые элементы
+    ).filter(Boolean);
 }
 
 

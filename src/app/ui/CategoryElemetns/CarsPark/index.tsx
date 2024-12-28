@@ -30,7 +30,6 @@ const CarsPark: React.FC = () => {
 
             {/* Правый блок с элементами */}
             <div className={styles.carsPark_right}>
-                <div className={styles.carsPark_right_containerItem}>
                     {/* Элементы спецтехники */}
                     <article className={styles.carsPark_right_item}>
                         <Image
@@ -68,9 +67,7 @@ const CarsPark: React.FC = () => {
                         />
                         <h4 className={styles.carsPark_right_item_title}>Дорожная<br />Фреза</h4>
                     </article>
-                </div>
 
-                <div className={styles.carsPark_right_containerItem}>
                     <article className={styles.carsPark_right_item}>
                         <Image
                             width={150}
@@ -107,7 +104,6 @@ const CarsPark: React.FC = () => {
                         />
                         <h4 className={styles.carsPark_right_item_title}>Погрузчики</h4>
                     </article>
-                </div>
             </div>
         </section>
     );

@@ -1,25 +1,36 @@
 .carsPark{
   width: 100%;
-  height: 350px;
+  height: 370px;
   display: flex;
   -webkit-box-shadow: 15px 15px 16px -15px rgba(0, 0, 0, 0.28);
   -moz-box-shadow: 15px 15px 16px -15px rgba(0, 0, 0, 0.28);
   box-shadow: 15px 15px 16px -15px rgba(0, 0, 0, 0.28);
   border-radius: 6px;
   margin-top: 10px;
+  overflow: hidden;
+
+  @media (max-width: 650px) {
+    height: 350px;
+  }
 
   &_left{
     padding: 15px;
 
+
+
     &_container{
       position: relative;
       text-align: center;
-      width: 20%;
+      width: auto;
       background-color: #383838;
       height: 100%;
       color: white;
       display: flex;
       border-radius: 6px 0px 0px 6px;
+      justify-content: center;
+
+      @media (max-width: 850px) {
+      }
 
     }
 
@@ -39,6 +50,15 @@
     &_img{
       margin-bottom: 10px;
       position: relative;
+      width: 100%;
+      height: auto;
+      max-height: 150px;
+      object-fit: contain;
+
+      @media (max-width: 850px) {
+        max-height: 170px;
+      }
+
 
     }
 
@@ -49,6 +69,11 @@
       text-transform: uppercase;
       font-weight: 700;
       margin: 20px 0;
+
+      @media (max-width: 1050px) {
+        margin: 10px 0;
+        font-size: clamp(16px, 1.5vw, 20px);
+      }
     }
 
     &_subtitle{
@@ -56,6 +81,10 @@
       line-height: 18px;
       color: #a1a9a9;
       text-align: left;
+
+      @media (max-width: 1050px) {
+        font-size: clamp(13px, 1vw, 15px);
+      }
 
     }
 
@@ -75,66 +104,42 @@
     width: 80%;
     padding: 10px;
     border-radius: 0px 6px 6px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    height: 100%;
+    border: 1px solid #e4e4e4;
+    border-left: 0px;
 
-    &_containerItem{
-      justify-content: center;
-      display: flex;
-      height: 50%;
+
+    @media (max-width: 450px) {
+      width: 100%;
+      padding: 5px;
     }
 
-    &_containerItemBrand{
-      justify-content: center;
-      display: flex;
-      height: 50%;
-      position: relative;
-      margin-top: 10px;
-      &_title{
-        background-color: #14a414;
-        color: #fff;
-        text-transform: uppercase;
-        font-size: 14px;
-        width: 65px;
-        height: 115px;
-        position: relative;
 
+    @media (max-width: 850px) {
+      padding: 7px;
 
-        span{
-          color: white;
-          font-size: 14px;
-          font-weight: 700;
-
-          position: absolute;
-          transform: rotate(-90deg) translateX(-95%) translateY(30%);
-
-        }
-      }
-
-      &_item{
-        width: 25%;
-        text-align: center;
-        height: 100%;
-
-        img{
-          margin-top: 15px;
-        }
-
-        &_title{
-          margin-top: 10px;
-          font-size: 14px;
-          font-weight: 700;
-          color: #555454;
-          text-transform: uppercase;
-
-        }
-      }
     }
+
     &_item{
-      width: 25%;
+      width: 100%;
       text-align: center;
-      height: 100%;
+      min-width: 130px;
+      height: auto;
+      object-fit: contain;
+
 
       img{
         margin-top: 15px;
+        object-fit: contain;
+        max-height: 250px;
+
+        width: 100%;
+        height: 50%;
       }
 
       &_title{
@@ -143,6 +148,11 @@
         font-weight: 700;
         color: #555454;
         text-transform: uppercase;
+        text-align: center;
+        word-break: break-word;
+
+
+
 
       }
     }

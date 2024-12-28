@@ -3,7 +3,7 @@
   width: 100%;
   height: 100%;
   &_img{
-    border-radius: 5px  ;
+
     position: relative;
     z-index: 2;
     width: 100%;
@@ -12,6 +12,14 @@
     -moz-box-shadow: -6px -6px 43px 0px rgba(34, 60, 80, 0.2);
     box-shadow: -6px -6px 43px 0px rgba(34, 60, 80, 0.2);
     object-fit: cover;
+
+    &_borderWork{
+      border-radius: 5px 0px 0px 0px;
+    }
+
+    &_borderDef{
+      border-radius: 5px  ;
+    }
   }
 
   &_containerPoints{

@@ -4,18 +4,28 @@
     height: 540px;
     display: flex;
     margin-bottom: 50px;
+    width: 100%;
+
+    @media (max-width: 780px) {
+      display: block;
+      height: auto;
+    }
   }
 
   &_containerSlider{
-    width: 600px;
+    width: auto;
     height: 450px;
 
     &_number{
       position: absolute;
-      bottom: 0;
+      bottom: 0px;
       display: flex;
       align-items: center;
       left: 20px;
+
+      @media (max-width: 780px) {
+        bottom: -60px;
+      }
 
       &_containerTitle{
         display: block;
@@ -34,23 +44,79 @@
     }
   }
 
+  &_containerSliderBack{
+    width: 71%;
+
+    @media (max-width: 780px) {
+      width: 99%;
+    }
+  }
+
   &_TitleDesc {
     position: relative;
-    width: 118%;
+    width: 111%;
     height: 440px;
     background-color: #3b3b3b;
     z-index: 0;
     right: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    @media (max-width: 780px) {
+      width: 96vw;
+      right: 0;
+      height: auto;
+      display: block;
+      margin-top: 30px;
+      padding: 20px;
+      margin-bottom: 80px;
+    }
+
+    @media (max-width: 680px) {
+      width: 95vw;
+    }
+
+    @media (max-width: 550px) {
+      width: 94vw;
+      height: auto;
+    }
 
     border-radius: 4px;
     &_container{
+      width: 71%;
+      @media (max-width: 780px) {
+        width: 100%;
+      }
+
     }
 
     &_title{
       position: relative;
       margin: 20px 0 20px 50px;
-      font-size: 30px;
+      font-size: clamp(25px, 1vw, 30px);
       color: #313131;
+
+      @media (max-width: 780px) {
+        color: #fff;
+        margin: 0px;
+        font-size: clamp(26px, 4vw, 32px);
+      }
+
+      &_desktop{
+        @media (max-width: 780px) {
+          display: none;
+        }
+      }
+
+      &_mobile{
+        display: none;
+
+        @media (max-width: 780px) {
+          display: block;
+        }
+      }
 
       font-weight: 800;
 
@@ -64,27 +130,29 @@
       }
     }
 
-    &_container{
-      margin-left: 0px;
-      padding-right: 40px;
-    }
 
     &_desc {
-
-
-
       &_containerDesc{
-        position: relative;
-        top: 60%;
-        transform: translateY(50%);
-        margin-left: 100px;
-        margin-top: 20px;
+        display: flex;
+        align-content: center;
+
+        @media (max-width: 780px) {
+          display: block;
+        }
+
       }
 
       &_containerDescPrice{
         position: relative;
-        transform: translateY(30%);
-        margin-left: 100px;
+        transform: translateY(0%);
+        margin-top: -40px;
+
+        @media (max-width: 780px) {
+          margin-left: 0;
+          transform: translateY(0%);
+          margin-top: 0;
+        }
+
       }
 
       &_text{
@@ -93,13 +161,23 @@
         font-weight: 500;
         text-align: justify;
 
+        @media (max-width: 780px) {
+          margin-top: 30px;
+          color: #c6c6c6;
+        }
+
       }
 
       &_title{
-        color: #14a414;
-        margin: 40px 0 10px 0;
-        font-weight: 800;
+        color: #13a513;
+        margin: 20px 0 10px 0;
+        font-weight: 700;
         font-size: 20px;
+
+        @media (max-width: 780px) {
+          margin: 15px 0;
+          font-size: 18px;
+        }
 
 
         &_list{
@@ -116,11 +194,21 @@
         font-size: 28px;
         color: #fff;
         font-weight: 800;
+
+        @media (max-width: 780px) {
+          font-size: 22px;
+          margin-top: 25px;
+        }
         span{
 
           color: #14a414;
+          margin-bottom: 10px;
+          font-size: 26px;
+          font-weight: 700;
+          @media (max-width: 780px) {
+            font-size: 20px;
 
-          margin-bottom: 15px;
+          }
         }
       }
     }
@@ -129,9 +217,9 @@
       position: absolute;
       background-color: #339933;
       font-weight: 700;
-      font-size: 18px;
+      font-size: clamp(14px, 2.5vw, 18px);
       bottom: 7%;
-      right: -10px;
+      right: 0;
       z-index: 1;
       width: 85%;
       height: 55px;
@@ -140,7 +228,21 @@
       padding: 10px;
       display: flex;
       align-items: center;
-      margin-right: 10px;
+
+      @media (max-width: 780px) {
+        position: relative;
+        margin-top: 30px;
+        transform: translateX(22%);
+      }
+
+      @media (max-width: 400px) {
+        position: relative;
+        margin-top: 30px;
+        transform: translateX(25%);
+      }
+
+
+
 
       &_text {
         color: white;
@@ -157,16 +259,21 @@
     height: 100%;
     z-index: 2;
     object-fit: cover;
+
     &_back {
       content: "";
       position: absolute;
       top: 10px;
       left: 10px;
-      width: 600px;
+      width: 50%;
       height: 450px;
       background-color: #339933;
       z-index: 1;
       border-radius: 0px 0px 6px 0px;
+
+      @media (max-width: 780px) {
+        width: 99%;
+      }
 
     }
   }

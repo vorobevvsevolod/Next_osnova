@@ -5,14 +5,13 @@ import {Metadata, ResolvingMetadata} from "next";
 const WorksItemCard = dynamic(() => import("@/app/ui/CategoryElemetns/WorksItemCard"));
 const YandexMap = dynamic(() => import("@/app/ui/CategoryElemetns/YandexMap"));
 import React from "react";
-import styles from './styles.module.scss';
+import styles from '../../../workItem.module.scss';
 import categoryStyles from "../../../categoryPages.module.scss";
 import ImagesTitleBlock from "@/app/ui/ImagesTitleBlock";
 import {WorksPropsInterface} from "@/app/interfaces/Works/WorksProps.interface";
 import {WorksCategory} from "@/app/(categoryPages)/WorksCategory";
-import {useRouter} from "next/navigation";
 import Link from "next/link";
-import {BreadcrumbList, Product, Service, WithContext} from "schema-dts";
+import {BreadcrumbList, Product, WithContext} from "schema-dts";
 import {OrganizationSchema} from "@/services/OrganizationSchema";
 
 

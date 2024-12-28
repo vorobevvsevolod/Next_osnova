@@ -194,9 +194,7 @@ const YandexMapMarsh: React.FC<Props> = (props) => {
                 strategy="afterInteractive"
             ></Script>
             <div className={styles.yandexMap_container}>
-                <div id="map" style={{width: "70%", height: "600px"}}></div>
-
-
+                <div id="map" className={styles.yandexMap_map}></div>
                 <div className={styles.yandexMap_calculation}>
                     <div className={styles.yandexMap_title}><span>Калькулятор</span></div>
                     <div className={styles.yandexMap_calculation_container}>
