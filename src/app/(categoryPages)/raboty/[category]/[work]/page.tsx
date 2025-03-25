@@ -156,7 +156,7 @@ export default async function WorkPageServer(props: WorksPropsInterface) {
                     <div className={categoryStyles.categoryPages_text}>
                         {work.features}
                     </div>
-                    <h2 className={categoryStyles.categoryPages_title}>Стоимость </h2>
+                    <h2 className={categoryStyles.categoryPages_title}>Стоимость</h2>
 
 
                     <table className={styles.workItem_priceTable}>
