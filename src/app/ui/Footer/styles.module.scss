@@ -1,6 +1,10 @@
 .footer{
   margin-top: 30px;
+<<<<<<< HEAD
   height:  auto;
+=======
+  height:  calc(((100vh - 140px)/6) * 2);
+>>>>>>> 35f495e70e4f26a7c4dc18d55cf1e0c651dbe791
   width:calc(100% - 180px) ;
   background-color: #333; /* Цвет фона футера (можно изменить) */
   color: white;
@@ -17,6 +21,16 @@
     margin-left: 0;
   }
 
+<<<<<<< HEAD
+=======
+  @media (max-width: 1200px) {
+    min-height:  calc(((100vh - 140px)/6) * 2);
+    height: auto;
+
+
+  }
+
+>>>>>>> 35f495e70e4f26a7c4dc18d55cf1e0c651dbe791
 
 
   &_top{
@@ -65,11 +79,14 @@
       padding: 0px;
     }
 
+<<<<<<< HEAD
     @media (max-height: 960px) {
       height: calc(((100vh - 140px)/6) * 2);
     }
 
 
+=======
+>>>>>>> 35f495e70e4f26a7c4dc18d55cf1e0c651dbe791
 
     &_item{
       position: relative;

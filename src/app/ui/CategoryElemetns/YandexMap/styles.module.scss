@@ -41,11 +41,18 @@
   &_map{
     height: 100%;
     width: 65%;
+<<<<<<< HEAD
 
     @media (max-width: 850px) {
       width: 60%;
       z-index: 1000;
 
+=======
+    z-index: 1000;
+
+    @media (max-width: 850px) {
+      width: 60%;
+>>>>>>> 35f495e70e4f26a7c4dc18d55cf1e0c651dbe791
     }
 
     @media (max-width: 740px) {

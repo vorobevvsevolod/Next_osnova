@@ -155,7 +155,11 @@ export default async function WorkPageServer(props: WorksPropsInterface) {
                     <div className={categoryStyles.categoryPages_text}>
                         {work.features}
                     </div>
+<<<<<<< HEAD
                     <h2 className={categoryStyles.categoryPages_title}>Стоимость</h2>
+=======
+                    <h2 className={categoryStyles.categoryPages_title}>Стоимость </h2>
+>>>>>>> 35f495e70e4f26a7c4dc18d55cf1e0c651dbe791
 
                     {
                         work.price.split(';').length === 1
