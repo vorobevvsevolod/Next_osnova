@@ -8,9 +8,7 @@ import Header from "@/app/ui/Header/header";
 const HeaderServer = async () => {
     let categories: ICategory[] = await CategoriesGetAll();
     return (
-        <div>
-            <Header categories={categories} />
-        </div>
+        <Header categories={categories} />
     );
 };
 

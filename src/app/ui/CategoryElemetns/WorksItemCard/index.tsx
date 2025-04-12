@@ -50,7 +50,7 @@ const WorksItemCard: React.FC<Props> =  (props) =>{
                                             props.materials
                                                 .filter(workFilter => workFilter.categoryId === (props.activeCategory ? props.activeCategory.id : '1') && workFilter.id !== props.material?.id)
                                                 .map((matMap) => (
-                                                        <Item key={matMap.id} work={{...matMap, price: `от ${matMap.sub.length ? Math.min(...matMap.sub.map(item => item.Price_Up_To_100)) + " до " +  Math.max(...matMap.sub.map(item => item.Price_Up_To_100)): matMap.Price_Up_To_100 }`}} activeCategoryUrl={props.activeCategory ? "materialy/" + props.activeCategory.url : 'unpaved_roads'}/>
+                                                        <Item key={matMap.id} work={{...matMap, price: `${matMap.sub.length ? `${Math.min(...matMap.sub.map(item => item.Price_Up_To_100))}:${Math.max(...matMap.sub.map(item => item.Price_Up_To_100))}`: matMap.Price_Up_To_100 }`}} activeCategoryUrl={props.activeCategory ? "materialy/" + props.activeCategory.url : 'unpaved_roads'}/>
                                                     )
                                                 )
                                         )
@@ -60,7 +60,7 @@ const WorksItemCard: React.FC<Props> =  (props) =>{
                                                 .filter(workFilter => workFilter.categoryId === (props.activeCategory ? props.activeCategory.id : '1') && workFilter.id === props.material?.id)
                                                 .map((matMap) => (
                                                     matMap.sub.map(subMap => (
-                                                        <Item key={subMap.id} work={{...subMap, price: `от ${String(subMap.Price_Up_To_100)}`}} activeCategoryUrl={props.activeCategory ? "materialy/" + props.activeCategory.url + "/" + props.materialUrl : 'unpaved_roads'}/>
+                                                        <Item key={subMap.id} work={{...subMap, price: `${String(subMap.Price_Up_To_100)}`}} activeCategoryUrl={props.activeCategory ? "materialy/" + props.activeCategory.url + "/" + props.materialUrl : 'unpaved_roads'}/>
                                                     ))
                                                 ))
                                         )
@@ -78,14 +78,14 @@ const WorksItemCard: React.FC<Props> =  (props) =>{
                                                     .map((matMap) => {
                                                         if(props.activeCategory?.id === 4 ){
                                                             return (
-                                                                <Item key={matMap.id} work={{...matMap, price: `от ${String(matMap.Price_Up_To_100)}`}} activeCategoryUrl={props.activeCategory ? "materialy/" + props.activeCategory.url : 'unpaved_roads'}/>
+                                                                <Item key={matMap.id} work={{...matMap, price: `${String(matMap.id === 26 ? matMap.Price_Over_300 : matMap.Price_Up_To_100)}`}} activeCategoryUrl={props.activeCategory ? "materialy/" + props.activeCategory.url : 'unpaved_roads'}/>
                                                             )
                                                         } else { return (
                                                             <Item
                                                                 key={matMap.id}
                                                                 work={{
                                                                     ...matMap,
-                                                                    price: `от ${Math.min(...matMap.sub.map(item => item.Price_Up_To_100))} до ${Math.max(...matMap.sub.map(item => item.Price_Up_To_100))}`
+                                                                    price: `${Math.min(...matMap.sub.map(item => item.Price_Up_To_100))}:${Math.max(...matMap.sub.map(item => item.Price_Up_To_100))}`
                                                                 }}
                                                                 activeCategoryUrl={props.activeCategory ? "materialy/" + props.activeCategory.url : 'unpaved_roads'}
                                                             />
@@ -96,7 +96,7 @@ const WorksItemCard: React.FC<Props> =  (props) =>{
                                                 props.materials
                                                 .filter(workFilter => workFilter.categoryId === (props.activeCategory ? props.activeCategory.id : '1') && workFilter.id !== props.material?.id)
                                                 .map((matMap) => {
-                                                    return <Item key={matMap.id} work={{...matMap, price: `от ${String(matMap.Price_Over_300)} до ${String(matMap.Price_Up_To_100)}`}} activeCategoryUrl={props.activeCategory ? "materialy/" + props.activeCategory.url : 'unpaved_roads'}/>;
+                                                    return <Item key={matMap.id} work={{...matMap, price: `${String(matMap.Price_Over_300)}:${String(matMap.Price_Up_To_100)}`}} activeCategoryUrl={props.activeCategory ? "materialy/" + props.activeCategory.url : 'unpaved_roads'}/>;
                                                 })
                                             )
                                         )
@@ -108,7 +108,7 @@ const WorksItemCard: React.FC<Props> =  (props) =>{
 
                                                 if (matMap.sub && matMap.sub.length) {
                                                    return  matMap.sub.map(sub => {
-                                                       if(sub.id !== props.material?.id) return  <Item key={sub.id} work={{...sub, price: `от ${String(sub.Price_Up_To_100)}`}} activeCategoryUrl={props.activeCategory ? `materialy/${props.activeCategory.url}/${matMap.url}/` : 'unpaved_roads'}/>
+                                                       if(sub.id !== props.material?.id) return  <Item key={sub.id} work={{...sub, price: `${String(sub.Price_Up_To_100)}`}} activeCategoryUrl={props.activeCategory ? `materialy/${props.activeCategory.url}/${matMap.url}/` : 'unpaved_roads'}/>
                                                    }
                                                     );
                                                 }
@@ -129,10 +129,10 @@ const WorksItemCard: React.FC<Props> =  (props) =>{
                                                 if (subMap.Price_Up_To_100 < min) min = subMap.Price_Up_To_100;
                                             });
 
-                                            return <Item key={matMap.id} work={{...matMap, price: `от ${String(min)} до ${String(max)}`}} activeCategoryUrl={props.activeCategory ? "materialy/" + props.activeCategory.url : 'unpaved_roads'}/>;
+                                            return <Item key={matMap.id} work={{...matMap, price: `${String(min)}:${String(max)}`}} activeCategoryUrl={props.activeCategory ? "materialy/" + props.activeCategory.url : 'unpaved_roads'}/>;
                                         } else {
                                             // Если нет подкатегорий
-                                            return <Item key={matMap.id} work={{...matMap, price: matMap.Price_Over_300 ?  `от ${String(matMap.Price_Over_300)} до ${String(matMap.Price_Up_To_100)}` : `${matMap.Price_Up_To_100}` }} activeCategoryUrl={props.activeCategory ? "materialy/" + props.activeCategory.url : 'unpaved_roads'} />;
+                                            return <Item key={matMap.id} work={{...matMap, price: matMap.Price_Over_300 ?  `${String(matMap.Price_Over_300)}:${String(matMap.Price_Up_To_100)}` : `${matMap.Price_Up_To_100}` }} activeCategoryUrl={props.activeCategory ? "materialy/" + props.activeCategory.url : 'unpaved_roads'} />;
                                         }
                                     })
                             )

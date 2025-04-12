@@ -5,8 +5,18 @@
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-between;
     gap: 25px 15px;
+
+    @media (max-width: 1150px) {
+      gap: 10px;
+    }
+
+    @media (max-width: 1090px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 650px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
-
-
 
 }

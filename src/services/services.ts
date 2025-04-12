@@ -16,9 +16,6 @@ export async function CategoriesGetAll(): Promise<ICategory[]> {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            next: {
-                revalidate: 100
             }
         });
 
@@ -41,9 +38,6 @@ export async function MaterialsGetAll(): Promise<IMaterial[]> {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            next: {
-                revalidate: 100
             }
         });
 
@@ -66,9 +60,6 @@ export async function DeliveryLocationGetAll(): Promise<DeliveryLocationResponse
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            next: {
-                revalidate: 100
             }
         });
 
@@ -94,9 +85,6 @@ export async function WorksGetById(id: number): Promise<IWork> {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            next: {
-                revalidate: 100
             }
         });
 
@@ -119,9 +107,6 @@ export async function WorksGetAll(): Promise<IWork[]> {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            next: {
-                revalidate: 100
             }
         });
 
@@ -144,9 +129,6 @@ export async function GalleryWorksGetAll(): Promise<IGalleryWorks[]> {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            next: {
-                revalidate: 100
             }
         });
 

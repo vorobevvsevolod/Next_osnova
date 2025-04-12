@@ -2,10 +2,25 @@
 import styles from "./style.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import React from "react";
+import {ICategory} from "@/app/interfaces/ICategory.interface";
 
-const HeaderTop: React.FC = () => {
+interface props {
+    categories: ICategory[];
+}
+const HeaderTop: React.FC<props> = (props) => {
+
+    const [visibleHeaderMob, setVisibleHeaderMob] = React.useState(false);
+
+
     return (
         <section className={styles.headerSub} aria-label="Контактная информация и дополнительная навигация">
+            <div className={styles.headerSub_logo}>
+                <Link href={'/'} className={styles.headerSub_logo_container}>
+                    <h1 className={styles.headerSub_logo_title}>СК ОСНОВА</h1>
+                    <p className={styles.headerSub_logo_subTitle}>РАБОТАЕМ С 2007 ГОДА</p>
+                </Link>
+            </div>
             <div className={styles.headerSub_top}>
                 <div className={styles.headerSub_top_left}>
                     <div className={styles.headerSub_top_left_title}>
@@ -18,7 +33,7 @@ const HeaderTop: React.FC = () => {
                 <div className={styles.headerSub_top_center}>
                     <div className={styles.headerSub_top_center_item}>
                         <div className={styles.headerSub_top_center_item_call}>
-                            <Image width={20} height={20} src="/img/call.png" alt="call" />
+                            <Image width={20} height={20} src="/img/call.png" alt="call"/>
                             <span>Нерудные материалы:</span>
                         </div>
                         <a
@@ -30,7 +45,7 @@ const HeaderTop: React.FC = () => {
                     </div>
                     <div className={styles.headerSub_top_center_item}>
                         <div className={styles.headerSub_top_center_item_call}>
-                            <Image width={20} height={20} src="/img/call.png" alt="call" />
+                            <Image width={20} height={20} src="/img/call.png" alt="call"/>
                             <span>Дорожные и земляные работы:</span>
                         </div>
                         <a
@@ -56,12 +71,43 @@ const HeaderTop: React.FC = () => {
                     <Link href="/" className={styles.headerSub_bottom_nav_link}>
                         Главная
                     </Link>
-                    <Link href="/gallery_works" className={styles.headerSub_bottom_nav_link}>
+                    <Link href="/galereya" className={styles.headerSub_bottom_nav_link}>
                         Галерея работ
                     </Link>
-                    <Link href="/contact" className={styles.headerSub_bottom_nav_link}>
+                    <Link href="/kontakty" className={styles.headerSub_bottom_nav_link}>
                         Контакты
                     </Link>
+                </nav>
+
+                <nav
+                    className={`navBurger`}
+                    onClick={() => setVisibleHeaderMob(!visibleHeaderMob)}
+                >
+                    <div className={`navT ${
+                        visibleHeaderMob ? 'active' : ''
+                    }`}>
+                        <div className={'icon'}></div>
+                    </div>
+                </nav>
+
+
+            </div>
+            <div
+                className={`${styles.headerSub_bottom_burgerModal_container} ${visibleHeaderMob ? styles.headerSub_bottom_burgerModal_container_show : styles.headerSub_bottom_burgerModal_container_noShow}`}
+                onClick={() => setVisibleHeaderMob(!visibleHeaderMob)}
+            >
+                <nav
+                    className={`${styles.headerSub_bottom_burgerModal} ${visibleHeaderMob ? styles.headerSub_bottom_burgerModal_show : styles.headerSub_bottom_burgerModal_noShow}`}>
+                    <Link href={'/'} className={styles.headerSub_bottom_burgerModal_item}>Главная</Link>
+                    {
+                        props.categories.map((cat, index) => (
+                            <Link key={cat.id}
+                                  href={`${cat.id !== 4 && cat.id !== 5 ? '/raboty' : '/materialy'}/${cat.url}`}
+                                  className={`${styles.headerSub_bottom_burgerModal_item} ${styles.headerSub_bottom_burgerModal_item_category}`}>{cat.name}</Link>
+                        ))
+                    }
+                    <Link href={'/galereya'} className={styles.headerSub_bottom_burgerModal_item}>Галерея работ</Link>
+                    <Link href={'/kontakty'} className={styles.headerSub_bottom_burgerModal_item}>Контакты</Link>
                 </nav>
             </div>
         </section>

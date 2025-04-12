@@ -7,6 +7,8 @@ import {
     WorksGetAll
 } from "@/services/services";
 import HomePageClient from "@/app/ui/HomePageClient/page";
+import {OrganizationSchema} from "@/services/OrganizationSchema";
+import React from "react";
 
 
 
@@ -21,7 +23,15 @@ export default async function Home() {
         GalleryWorksGetAll()
     ]);
 
-    return (
-        <HomePageClient works={works} categories={categories} galleryWorks={galleryWorks} materials={materials} deliveryLocationResponse={deliveryLocationResponse}/>
+    return(
+        <>
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{__html: JSON.stringify(OrganizationSchema)}}
+        />
+        <HomePageClient works={works} categories={categories} galleryWorks={galleryWorks} materials={materials}
+                        deliveryLocationResponse={deliveryLocationResponse}/>
+        </>
+
     )
 }

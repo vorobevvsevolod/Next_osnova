@@ -5,13 +5,12 @@ import { IWork } from "@/app/interfaces/Works/IWork.interface";
 import Link from "next/link";
 import Image from "next/image";
 
-const Item: React.FC<{ work: IWork; activeCategoryUrl: string }> = (props) => {
+const Item: React.FC<{ work: IWork; activeCategoryUrl: string, height?:string }> = (props) => {
     const { work, activeCategoryUrl } = props;
     const workUrl = `${process.env.NEXT_PUBLIC_API_URL}/${work.images[0].url}`;
-    const priceLabel = work.price === "смета" ? work.price : `${work.price}р.`;
 
     return (
-        <article className={styles.item}>
+        <article className={styles.item} style={{height: props.height ? props.height : '100%'}}>
             {/* Ссылка на детальную страницу */}
                 {/* Изображение объекта */}
                 <Image
@@ -36,7 +35,17 @@ const Item: React.FC<{ work: IWork; activeCategoryUrl: string }> = (props) => {
 
                 {/* Цена работы */}
                 <div className={styles.item_contaierTitle_price}>
-                    Цена: <span>{priceLabel}</span>
+                <b className={styles.item_contaierTitle_price_title}>Цена:</b> {
+                    work.price === "смета" ? <span>{work.price}</span>
+                        : (
+                            work.price.split(";").length !== 1
+                            ? <>от <span>{work.price.split(";")[0]}</span>р от <span>{work.price.split(";")[1]}</span>р</>
+                            : work.price.split(":").length !== 1 ?  <>от <span>{work.price.split(":")[0]}</span>р до <span>{work.price.split(":")[1]}</span>р</> :
+                                    (
+                                        work.price.split("-").length !== 1 ? <>от <span>{work.price.split("-")[0]}</span>р до <span>{work.price.split("-")[1]}</span>р</> : <>от <span>{work.price}</span>р</>
+                                    )
+                        )
+                }
                 </div>
 
                 <Link className={styles.item_contaierTitle_link} href={`/${activeCategoryUrl}/${work.url}`} aria-label={`Подробнее о ${work.title}`}><span>Подробнее</span></Link>

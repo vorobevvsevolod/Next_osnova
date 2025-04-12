@@ -1,4 +1,3 @@
-'use server'
 import {
     CategoriesGetAll,
     DeliveryLocationGetAll,
@@ -8,7 +7,7 @@ import {
 import dynamic from "next/dynamic";
 import {MaterialsCategory} from '../../MaterialsCategory';
 import {Metadata, ResolvingMetadata} from "next";
-import styles from "./styles.module.scss";
+import styles from "../../categoryPages.module.scss";
 const WorksItemCard = dynamic(() => import("@/app/ui/CategoryElemetns/WorksItemCard"));
 const CarsPark = dynamic(() => import("@/app/ui/CategoryElemetns/CarsPark"));
 import React from "react";
@@ -140,7 +139,7 @@ export default async function SlugMaterialsServer(props: MaterialsPropsInterface
                         .flatMap(item => item.sub.map(sub => sub.Price_Up_To_100))
                     ),
                 "offerCount": offers.length,
-                "offers": offers
+                "offers": offers,
             }
         }
         return (
@@ -167,6 +166,7 @@ export default async function SlugMaterialsServer(props: MaterialsPropsInterface
 
                 <div className={categoryStyles.categoryPages_text}>
                     {infoCategory.subTitleText}
+                    {infoCategory.seoTitle}
                 </div>
 
                 <h2 className={categoryStyles.categoryPages_titleCenter}>{infoCategory.titleCenter} </h2>
@@ -177,51 +177,51 @@ export default async function SlugMaterialsServer(props: MaterialsPropsInterface
                 <h2 className={categoryStyles.categoryPages_titleCenter}>{infoCategory.titleCenter}</h2>
 
                 {
-                    params.category === 'plodorodnaya-zemlya' ? <table className={styles.fertileLand_priceTable}>
+                    params.category === 'plodorodnaya-zemlya' ? <table className={styles.categoryPages_priceTable}>
                             <thead>
                             <tr>
-                                <td className={styles.fertileLand_priceTable_head}>Вид грунта</td>
-                                <td className={styles.fertileLand_priceTable_head}>ЦЕНА ЗА КУБ ОТ 300 М3</td>
-                                <td className={styles.fertileLand_priceTable_head}>ЦЕНА ЗА КУБ ДО 300 М3</td>
-                                <td className={styles.fertileLand_priceTable_head}>ЦЕНА ЗА КУБ от 12 ДО 100 М3</td>
+                                <td className={styles.categoryPages_priceTable_head}>Вид грунта</td>
+                                <td className={styles.categoryPages_priceTable_head}>ЦЕНА ЗА КУБ ОТ 300 М3</td>
+                                <td className={styles.categoryPages_priceTable_head}>ЦЕНА ЗА КУБ ДО 300 М3</td>
+                                <td className={styles.categoryPages_priceTable_head}>ЦЕНА ЗА КУБ от 12 ДО 100 М3</td>
                             </tr>
                             </thead>
-                            <tbody className={styles.fertileLand_priceTable_body}>
+                            <tbody className={styles.categoryPages_priceTable_body}>
                             {
                                 materials.length && materials.filter(mat => mat.categoryId === (activeCategory ? activeCategory.id : 4)).map(material => (
-                                    <tr key={material.id} className={styles.fertileLand_priceTable_tr}>
+                                    <tr key={material.id} className={styles.categoryPages_priceTable_tr}>
 
-                                        <td className={styles.fertileLand_priceTable_body_subtitle}>
+                                        <td className={styles.categoryPages_priceTable_body_subtitle}>
                                             <Link
                                                 href={activeCategory?.url + "/" + material.url}>{material.priceDescription}</Link>
                                         </td>
-                                        <td className={styles.fertileLand_priceTable_body_title}>от {material.Price_Over_300} руб.</td>
-                                        <td className={styles.fertileLand_priceTable_body_title}>от {material.Price_Up_To_300} руб.</td>
-                                        <td className={styles.fertileLand_priceTable_body_title}>от {material.Price_Up_To_100} руб.</td>
+                                        <td className={styles.categoryPages_priceTable_body_title}>от <strong className={styles.categoryPages_priceTable_price}>{material.Price_Over_300}</strong>  руб.</td>
+                                        <td className={styles.categoryPages_priceTable_body_title}>от  <strong className={styles.categoryPages_priceTable_price}>{material.Price_Up_To_300} </strong> руб.</td>
+                                        <td className={styles.categoryPages_priceTable_body_title}>от <strong className={styles.categoryPages_priceTable_price}> {material.Price_Up_To_100} </strong> руб.</td>
                                     </tr>
                                 ))
                             }
                             </tbody>
                         </table> :
-                        params.category === 'nerudnye-materialy' ? <table className={styles.fertileLand_priceTable}>
+                        params.category === 'nerudnye-materialy' ? <table className={styles.categoryPages_priceTable}>
                             <thead>
                             <tr>
-                                <td className={styles.fertileLand_priceTable_head}>Вид материала</td>
-                                <td className={styles.fertileLand_priceTable_head}>ЦЕНА ЗА КУБ/М3</td>
+                                <td className={styles.categoryPages_priceTable_head}>Вид материала</td>
+                                <td className={styles.categoryPages_priceTable_head}>ЦЕНА ЗА КУБ/М3</td>
 
                             </tr>
                             </thead>
-                            <tbody className={styles.fertileLand_priceTable_body}>
+                            <tbody className={styles.categoryPages_priceTable_body}>
                             {
                                 activeCategory?.id && materials.length && materials
                                     .filter(mat => mat.categoryId === (activeCategory ? activeCategory.id : 4))
                                     .map(material => (
                                         material.sub.map(subMaterial => (
                                             <tr key={subMaterial.id}>
-                                                <td className={styles.fertileLand_priceTable_body_subtitle}><Link
+                                                <td className={styles.categoryPages_priceTable_body_subtitle}><Link
                                                     href={`${activeCategory?.url}/${material.url}/${subMaterial.url}`}>{subMaterial.priceDescription}</Link>
                                                 </td>
-                                                <td className={styles.fertileLand_priceTable_body_title}>от {subMaterial.Price_Up_To_100} руб.</td>
+                                                <td className={styles.categoryPages_priceTable_body_title}>от {subMaterial.Price_Up_To_100} руб.</td>
                                             </tr>
                                         ))
                                     ))

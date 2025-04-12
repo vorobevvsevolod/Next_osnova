@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 // @ts-ignore
 import stylesCategory from "../../../(categoryPages)/categoryPages.module.scss";
@@ -16,6 +17,12 @@ const StagesWork: React.FC<{
     subTitle: string;
     stages: Stage[];
 }> = (props) => {
+
+    const [activeItem, setActiveItem] = React.useState({
+        active: true,
+        index: 0
+    })
+
     return (
         <section className={stylesCategory.stagesWork_container} aria-labelledby="stages-work-title">
             {/* Заголовок секции */}
@@ -36,6 +43,11 @@ const StagesWork: React.FC<{
                         <article
                             className={`${styles.stagesWork_item} ${isOdd ? styles.stagesWork_item_shadowRight : styles.stagesWork_item_shadowLeft}`}
                             key={index}
+                            onClick={() => {
+                                if(activeItem.active && activeItem.index === index) {
+                                    setActiveItem({active: false, index: 0});
+                                } else setActiveItem({active: true, index: index})
+                            }}
                         >
                             {isOdd ? (
                                 <>
@@ -56,17 +68,22 @@ const StagesWork: React.FC<{
                                     <Image
                                         width={300}
                                         height={200}
-                                        className={`${styles.stagesWork_item_img} ${styles.stagesWork_item_img_radiusRight}`}
+                                        className={`${styles.stagesWork_item_img} ${styles.stagesWork_item_img_radiusRight} ${(activeItem.index === index && activeItem.active) ? styles.stagesWork_item_img_active : ''}`}
                                         src={stage.img}
                                         alt={`Этап ${adjustedIndex}: ${stage.title}`}
                                     />
+                                    <div
+                                        className={`${styles.stagesWork_item_clickMe} ${(activeItem.index === index && activeItem.active) ? styles.stagesWork_item_clickMe_none : ''}`}>Нажми
+                                        на меня!
+                                    </div>
+
                                 </>
                             ) : (
                                 <>
                                     <Image
                                         width={300}
                                         height={200}
-                                        className={`${styles.stagesWork_item_img} ${styles.stagesWork_item_img_radiusLeft}`}
+                                        className={`${styles.stagesWork_item_img} ${styles.stagesWork_item_img_radiusLeft} ${(activeItem.index === index && activeItem.active) ? styles.stagesWork_item_img_active : ''}`}
                                         src={stage.img}
                                         alt={`Этап ${adjustedIndex}: ${stage.title}`}
                                     />
@@ -84,6 +101,8 @@ const StagesWork: React.FC<{
                                             {stage.text}
                                         </p>
                                     </div>
+
+                                    <div className={`${styles.stagesWork_item_clickMe} ${(activeItem.index === index && activeItem.active) ? styles.stagesWork_item_clickMe_none : ''}`} >Нажми на меня!</div>
                                 </>
                             )}
                         </article>

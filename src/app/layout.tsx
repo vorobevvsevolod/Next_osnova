@@ -5,6 +5,8 @@ import "./scss/globals.scss";
 import HeaderServer from "@/app/ui/Header/header.server";
 import HeaderTop from "@/app/ui/HeaderTop/headerTop";
 import SliderPartner from "@/app/ui/SliderPartner";
+import Footer from "@/app/ui/Footer/page";
+import HeaderTopServer from "@/app/ui/HeaderTop/headerTop.server";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,15 +36,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} `}>
+      <body className={`${geistSans.variable}`}>
         <HeaderServer/>
-          <div className={`${geistSans.variable} main `}>
-          <HeaderTop/>
+          <div className={`${geistSans.variable} main`}>
+          <HeaderTopServer/>
             <div className={'container'}>
               {children}
+              <SliderPartner/>
             </div>
-            <SliderPartner/>
+
           </div>
+      <Footer/>
       </body>
     </html>
   );

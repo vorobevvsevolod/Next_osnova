@@ -7,46 +7,132 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    height: 200px;
+    height: 220px;
+    z-index: 100;
+    border-radius: 6px;
+    position: relative;
 
-    &_shadowRight{
-      -webkit-box-shadow: 13px 13px 10px -13px rgba(34, 60, 80, 0.2);
-      -moz-box-shadow: 13px 13px 10px -13px rgba(34, 60, 80, 0.2);
-      box-shadow: 13px 13px 10px -13px rgba(34, 60, 80, 0.2);
+
+    @media (max-width: 550px) {
+      height: 280px;
     }
 
-    &_shadowLeft{
+
+    &_clickMe{
+      display: none;
+      position: absolute;
+      z-index: 1100;
+      background-color: #14a414;
+      color: #fff;
+      bottom: 5%;
+      left: 50%;
+
+      transform: translateX(-50%);
+      padding: 3px 10px 5px 10px;
+      border-radius: 30px;
+      font-weight: 500;
+      font-size: 14px;
+      @media (max-width: 450px) {
+        display: block;
+      }
+
+      &_none{
+        display: none;
+      }
+
+    }
+
+
+    &_shadowRight{
       -webkit-box-shadow: -13px 13px 10px -13px rgba(34, 60, 80, 0.2);
       -moz-box-shadow: -13px 13px 10px -13px rgba(34, 60, 80, 0.2);
       box-shadow: -13px 13px 10px -13px rgba(34, 60, 80, 0.2);
     }
 
-
-
+    &_shadowLeft{
+      -webkit-box-shadow: 13px 13px 10px -13px rgba(34, 60, 80, 0.2);
+      -moz-box-shadow: 13px 13px 10px -13px rgba(34, 60, 80, 0.2);
+      box-shadow: 13px 13px 10px -13px rgba(34, 60, 80, 0.2);
+    }
 
     &_TitleText{
-      width: 73%;
+      width: 75%;
+      height: 100%;
+      padding: 10px;
+      z-index: 101;
+
+      &:nth-child(2){
+        margin-left: 10px;
+      }
+      @media (max-width: 990px) {
+        width: 65%;
+        height: 100%;
+      }
+
+      @media (max-width: 650px) {
+        padding: 5px;
+      }
+
+      @media (max-width: 450px) {
+        width: 100%;
+        position: absolute;
+        background-color: #303030;
+        height: auto;
+
+        &:nth-child(2){
+          margin-left: 0px;
+        }
+        padding: 5px 13px 5px 13px;
+        border-radius: 6px;
+      }
       &_title{
-        position: relative;
+        display: flex;
+        position: absolute;
         width: 70px;
         height: 70px;
+        top: 10px;
+        left: 10px;
         font-family: fg-ex,sans-serif;
-        text-align: center;
         background-color: #fff;
         -webkit-box-shadow: 2px 2px 4px 0 rgba(0,0,0,.2);
         box-shadow: 2px 2px 4px 0 rgba(0,0,0,.2);
         z-index: 2;
         border-radius: 0px 0px 3px 0px;
-        margin: 10px 0px 0px 10px;
+
+        @media (max-width: 650px) {
+          width: 60px;
+          height: 60px;
+          top: 8px;
+          left: 8px;
+        }
+
+        @media (max-width: 450px) {
+          width: 40px;
+          height: 40px;
+          border-radius: 3px;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
 
 
         span{
           display: block;
-          text-align: center;
-          transform: translateY(11px);
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
           font-size: 36px;
           font-weight: 900;
           color: #585d5d;
+
+          @media (max-width: 650px) {
+            font-size: 30px;
+          }
+
+          @media (max-width: 450px) {
+            font-size: 25px;
+          }
         }
 
 
@@ -60,21 +146,63 @@
           background-color: #14a414;
           z-index: 1;
           border-radius: 3px 0px 0px 0px;
+
+          @media (max-width: 650px) {
+            width: 60px;
+            height: 60px;
+          }
+
+          @media (max-width: 450px) {
+            width: 50px;
+            height: 50px;
+
+            top: -5px;
+            left: -5px;
+            display: none;
+          }
         }
 
         &_container{
           display: flex;
           position: relative;
           align-items: center;
+          height: 70px;
 
+          @media (max-width: 650px) {
+            height: 60px;
+          }
+
+          @media (max-width: 450px) {
+            height: 50px;
+          }
         }
 
 
         &_subtitle{
-          padding: 0 0 0 20px;
+          margin-left: 90px;
           color: #757979;
           font-size: 19px;
           font-weight: 700;
+          @media (max-width: 990px) {
+            text-align: justify;
+            width: auto;
+          }
+          @media (max-width: 650px) {
+            margin-left: 80px;
+            line-height: 20px;
+            font-size: clamp(14px, 3vw, 17px);
+          }
+
+          @media (max-width: 550px) {
+            line-height: 15px;
+          }
+
+          @media (max-width: 450px) {
+            margin-left: 55px;
+            color: #fff;
+
+          }
+
 
         }
 
@@ -82,23 +210,73 @@
 
       &_text{
         font-size: 14px;
-        margin: 25px 0 25px 10px;
         text-align: justify;
         text-indent: 20px;
+        display: block;
+        margin-top: 15px;
 
+        max-height: 100px;
+        overflow-y: scroll;
+        padding-right: 5px;
 
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: #14a414;    /* цвет плашки */
+          border-radius: 20px;       /* закругления плашки */
+        }
+
+        @media (max-width: 450px) {
+          color: #aeaeae;
+          border-top: 1px solid #9d9d9d;
+          margin-top: 5px;
+          height: 140px;
+        }
       }
 
     }
 
     &_img{
       height: 100%;
-      width: 25%;
+      object-fit: cover;
+      transition: all 0.3s ease-in-out;
+
+      @media (max-width: 990px) {
+        width: 35%;
+      }
+
+      @media (max-width: 450px) {
+        width: 100%;
+        z-index: 1000;
+        padding-top: 60px;
+        border-radius: 6px;
+      }
+
+      &_active{
+
+        @media (max-width: 450px) {
+          z-index: 100;
+          padding-top: 160px;
+        }
+      }
+
       &_radiusLeft{
         border-radius: 6px 0px 0px 6px;
+
+        @media (max-width: 450px) {
+          border-radius: 6px;
+        }
       }
       &_radiusRight{
         border-radius: 0px 6px 6px 0px;
+
+        @media (max-width: 450px) {
+          border-radius: 6px;
+        }
       }
     }
   }

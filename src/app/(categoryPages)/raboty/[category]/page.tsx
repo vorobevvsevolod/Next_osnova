@@ -5,9 +5,7 @@ import { WorksCategory } from '../../WorksCategory';
 import { Metadata, ResolvingMetadata } from "next";
 import styles from "@/app/(categoryPages)/categoryPages.module.scss";
 import React from "react";
-import { MaterialsCategory } from "@/app/(categoryPages)/MaterialsCategory";
 import {WorksPropsInterface} from "@/app/interfaces/Works/WorksProps.interface";
-import Head from "next/head";
 import {BreadcrumbList, Offer, Product, Service, WithContext} from "schema-dts";
 import {OrganizationSchema} from "@/services/OrganizationSchema";  // Для добавления мета-данных
 
